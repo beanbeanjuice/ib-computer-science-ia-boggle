@@ -43,7 +43,7 @@ public class PreviousGamesScreen implements ApplicationScreen {
         gameID.setCellValueFactory(new PropertyValueFactory<>("gameID"));
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
         timeTaken.setCellValueFactory(new PropertyValueFactory<>("timeTaken"));
-        timeAllowed.setCellValueFactory(new PropertyValueFactory<>("timeAllowed"));
+        timeAllowed.setCellValueFactory(new PropertyValueFactory<>("totalTime"));
         wordsFound.setCellValueFactory(new PropertyValueFactory<>("wordsFound"));
         totalWords.setCellValueFactory(new PropertyValueFactory<>("totalWords"));
 
