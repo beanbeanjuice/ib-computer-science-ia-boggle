@@ -19,7 +19,6 @@ public class DictionaryHandler {
             while (scanner.hasNextLine()) { // For every line in the csv file, get the word, then add it to the dictionary.
                 String word = getWord(scanner.nextLine());
                 if (word.length() >= 3 && (qLength(word) || word.length() <= 16)) {
-                    System.out.println(word);
                     addDictionaryTree(word);
                 }
             }

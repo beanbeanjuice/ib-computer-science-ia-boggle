@@ -8,8 +8,13 @@ import java.util.Random;
 public class BoardHandler {
 
     private String[][] board;
+    private DistributionHandler distributionHandler;
 
-    public String[][] algorithm(DistributionHandler distributionHandler) {
+    public BoardHandler(DistributionHandler distributionHandler) {
+        this.distributionHandler = distributionHandler;
+    }
+
+    public String[][] randomize() {
         String[][] board = new String[4][4];
         ArrayList<String> letters = new ArrayList<>();
         Random rand = new Random();
@@ -21,7 +26,7 @@ public class BoardHandler {
             random = rand.nextInt(6);
 
             // Splits the letter distribution into its individual letters.
-            String letter = Main.getDistributionHandler().getDistribution().get(count++).split("")[random];
+            String letter = distributionHandler.getDistribution().get(count++).split("")[random];
 
             if (letter.equals("Q")) { // Case for when the letter is "Q" to add a "u" at the end.
                 letter += "U";

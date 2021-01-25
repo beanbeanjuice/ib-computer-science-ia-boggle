@@ -25,7 +25,7 @@ public class StartScreen implements ApplicationScreen {
 
         // START GAME BUTTON
         Button startButton = new Button("Start Game");
-        //startButton.setOnAction(e -> Main.setWindow(new GameScreen()));
+        startButton.setOnAction(e -> Main.setWindow(new GameScreen()));
         startButton.setMaxWidth(buttonWidth);
         startButton.setMinWidth(buttonWidth);
         startButton.setFont(new Font(buttonTextSize));

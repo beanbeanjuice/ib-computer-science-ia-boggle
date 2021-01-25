@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import screens.MySQLConnectionErrorScreen;
 import screens.StartScreen;
 import utilities.boxes.ConfirmationBox;
+import utilities.gamecreation.PreviousGame;
+import utilities.handlers.BoardHandler;
 import utilities.handlers.DictionaryHandler;
 import utilities.handlers.DistributionHandler;
 import utilities.handlers.GameFileHandler;
@@ -34,6 +36,7 @@ public class Main extends Application {
 
     private static DictionaryHandler dictionaryHandler;
     private static DistributionHandler distributionHandler;
+    private static BoardHandler boardHandler;
 
     public static void main(String[] args) {
         // TODO: new DictionaryHandler();
@@ -47,6 +50,9 @@ public class Main extends Application {
         // TODO: Maybe get the settings from the database?
         dictionaryHandler = new DictionaryHandler();
         distributionHandler = new DistributionHandler();
+        boardHandler = new BoardHandler(distributionHandler);
+        gameFileHandler = new GameFileHandler();
+
         launch(args);
     }
 
@@ -80,10 +86,12 @@ public class Main extends Application {
             if (currentScreen.getName().equals("GameScreen")) {
                 // Save Game Stuff
 
-                //boolean successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
-                //while (!successfulSave) {
-                //    successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
-                //}
+                PreviousGame previousGame = currentScreen.getGame().save();
+                System.out.println("saved");
+                boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
+                while (!successfulSave) {
+                    successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
+                }
             }
 
             System.out.println("Closed Program");
@@ -162,6 +170,21 @@ public class Main extends Application {
     // Gets the Boggle distribution.
     public static DistributionHandler getDistributionHandler() {
         return distributionHandler;
+    }
+
+    // Gets the board handler
+    public static BoardHandler getBoardHandler() {
+        return boardHandler;
+    }
+
+    // Gets the SQLServer Object
+    public static SQLServer getSQLServer() {
+        return sqlServer;
+    }
+
+    // Gets the SQL Game File Handler
+    public static GameFileHandler getGameFileHandler() {
+        return gameFileHandler;
     }
 
 }

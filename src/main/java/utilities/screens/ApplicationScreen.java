@@ -1,7 +1,7 @@
 package utilities.screens;
 
 import javafx.scene.Scene;
-import utilities.Game;
+import utilities.gamecreation.Game;
 
 public interface ApplicationScreen {
 
