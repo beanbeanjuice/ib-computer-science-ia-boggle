@@ -6,6 +6,7 @@ import screens.MySQLConnectionErrorScreen;
 import screens.StartScreen;
 import utilities.boxes.ConfirmationBox;
 import utilities.handlers.DictionaryHandler;
+import utilities.handlers.DistributionHandler;
 import utilities.handlers.GameFileHandler;
 import utilities.screens.ApplicationScreen;
 import utilities.sql.SQLServer;
@@ -30,7 +31,9 @@ public class Main extends Application {
     private static String port = "3306";
     private static String username = "admin";
     private static String password = "ETd7a4tpLx6qGZfmqBimEoDYh6ghEh";
+
     private static DictionaryHandler dictionaryHandler;
+    private static DistributionHandler distributionHandler;
 
     public static void main(String[] args) {
         // TODO: new DictionaryHandler();
@@ -43,6 +46,7 @@ public class Main extends Application {
 
         // TODO: Maybe get the settings from the database?
         dictionaryHandler = new DictionaryHandler();
+        distributionHandler = new DistributionHandler();
         launch(args);
     }
 
@@ -153,6 +157,11 @@ public class Main extends Application {
     // Gets the dictionary handler.
     public static DictionaryHandler getDictionaryHandler() {
         return dictionaryHandler;
+    }
+
+    // Gets the Boggle distribution.
+    public static DistributionHandler getDistributionHandler() {
+        return distributionHandler;
     }
 
 }
