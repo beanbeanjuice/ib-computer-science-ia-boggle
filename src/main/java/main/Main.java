@@ -5,7 +5,8 @@ import javafx.stage.Stage;
 import screens.MySQLConnectionErrorScreen;
 import screens.StartScreen;
 import utilities.boxes.ConfirmationBox;
-import utilities.filehandlers.GameFileHandler;
+import utilities.handlers.DictionaryHandler;
+import utilities.handlers.GameFileHandler;
 import utilities.screens.ApplicationScreen;
 import utilities.sql.SQLServer;
 
@@ -29,6 +30,7 @@ public class Main extends Application {
     private static String port = "3306";
     private static String username = "admin";
     private static String password = "ETd7a4tpLx6qGZfmqBimEoDYh6ghEh";
+    private static DictionaryHandler dictionaryHandler;
 
     public static void main(String[] args) {
         // TODO: new DictionaryHandler();
@@ -40,6 +42,7 @@ public class Main extends Application {
         allowIncorrect = false;
 
         // TODO: Maybe get the settings from the database?
+        dictionaryHandler = new DictionaryHandler();
         launch(args);
     }
 
@@ -145,6 +148,11 @@ public class Main extends Application {
     // Sets if the game should ignore the time limit
     public static void setIgnoreTimeLimit(boolean answer) {
         ignoreTimeLimit = answer;
+    }
+
+    // Gets the dictionary handler.
+    public static DictionaryHandler getDictionaryHandler() {
+        return dictionaryHandler;
     }
 
 }
