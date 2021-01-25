@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import screens.MySQLConnectionErrorScreen;
 import screens.StartScreen;
 import utilities.boxes.ConfirmationBox;
+import utilities.gamecreation.Game;
 import utilities.gamecreation.PreviousGame;
 import utilities.handlers.BoardHandler;
 import utilities.handlers.DictionaryHandler;
@@ -24,6 +25,7 @@ public class Main extends Application {
 
     private static final int BUTTON_WIDTH = 175;
     private static final int BUTTON_TEXT_SIZE = 18;
+    private static final int TITLE_SIZE = 24;
 
     private static boolean allowIncorrect;
     private static boolean ignoreTimeLimit;
@@ -86,8 +88,9 @@ public class Main extends Application {
             if (currentScreen.getName().equals("GameScreen")) {
                 // Save Game Stuff
 
-                PreviousGame previousGame = currentScreen.getGame().save();
-                System.out.println("saved");
+                Game game = currentScreen.getGame();
+                game.getTimer().stop();
+                PreviousGame previousGame = game.save();
                 boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
                 while (!successfulSave) {
                     successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
@@ -185,6 +188,11 @@ public class Main extends Application {
     // Gets the SQL Game File Handler
     public static GameFileHandler getGameFileHandler() {
         return gameFileHandler;
+    }
+
+    // Gets the title size
+    public static int getTitleSize() {
+        return TITLE_SIZE;
     }
 
 }

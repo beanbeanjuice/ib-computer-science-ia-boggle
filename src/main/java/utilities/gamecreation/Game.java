@@ -15,7 +15,7 @@ public class Game {
     private ArrayList<String> possibleWords; // Keeps the list of possible words that can be made from the boggle board.
     private ArrayList<String> inputWords; // Keeps the list of correct words input
     private int score; // Keeps the score
-    private double currentTime = 0;
+    private int timeLeft = 0;
 
     // THINGS NEEDED TO FUNCTION
     private String characterBuilder = ""; // Creates the "string" that will be built from.
@@ -23,18 +23,24 @@ public class Game {
     private boolean wordStarted; // Checks if a word is "being created"
     private Stack<BoardCharacter> characters; // A stack of the "CharacterHandler" class.
     private boolean hasPopped = false;
+    private Timer timer;
+    private GameScreen gameScreen;
 
-    public Game() {
+    public Game(GameScreen gameScreen) {
         board = Main.getBoardHandler().randomize(); // Creates a new board.
         inputWords = new ArrayList<>(); // Instantiates the inputWords ArrayList
         characters = new Stack<>(); // Instantiates the characters Stack
         spotsTaken = new boolean[4][4]; // Instantiates the spotsTaken 2D array.
         possibleWords = new Search().getPossibleWords(this); // Generates the possible words and saves it.
+        timer = new Timer(this);
+        timer.start();
+        // TODO: timer.stop() when game ending criteria has been met.
+        this.gameScreen = gameScreen;
     }
 
     public PreviousGame save() {
         // TODO: Get gameID from database. Instead of "1", should be something else.
-        return new PreviousGame(Main.getGameFileHandler().getFromDataBase().size() + 1, board, score, currentTime, Main.getTimeLimit(), inputWords.size(), possibleWords.size());
+        return new PreviousGame(Main.getGameFileHandler().getFromDataBase().size() + 1, board, score, (Main.getTimeLimit() * 60) - timeLeft, Main.getTimeLimit() * 60, inputWords.size(), possibleWords.size());
     }
 
     // METHOD FOR INCREASING SCORE AS PER THE RULES OF BOGGLE
@@ -53,6 +59,8 @@ public class Game {
             default: score += 11;
                 break;
         }
+
+        gameScreen.setScoreAmount(score);
     }
 
     // BOARD GETTER
@@ -173,8 +181,19 @@ public class Game {
     }
 
     // Method for getting the current score
-    private int getScore() {
+    public int getScore() {
         return score;
+    }
+
+    // Sets the time left
+    public void setTimeLeft(int time) {
+        timeLeft = time;
+        gameScreen.setTimeAmount(time);
+    }
+
+    // Gets the current timer.
+    public Timer getTimer() {
+        return timer;
     }
 
 }

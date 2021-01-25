@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
@@ -65,9 +66,14 @@ public class StartScreen implements ApplicationScreen {
         closeButton.setMinWidth(buttonWidth);
         closeButton.setFont(new Font(buttonTextSize));
 
+        // COMBINATION OF HELP AND RULES BUTTON
+        HBox combo = new HBox(5);
+        combo.getChildren().addAll(rulesButton, helpButton);
+        combo.setAlignment(Pos.CENTER);
+
         // Layout 1 - children are laid out in a vertical column
         VBox layout1 = new VBox(10);
-        layout1.getChildren().addAll(label1, startButton, rulesButton, previousGamesButton, settingsButton, closeButton);
+        layout1.getChildren().addAll(label1, startButton, combo, previousGamesButton, settingsButton, closeButton);
         layout1.setAlignment(Pos.CENTER);
         startScene = new Scene(layout1, 700, 700);
 

@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
 import utilities.gamecreation.Game;
+import utilities.handlers.GameFileHandler;
 import utilities.screens.ApplicationScreen;
 
 public class GameScreen implements ApplicationScreen {
@@ -28,7 +29,7 @@ public class GameScreen implements ApplicationScreen {
 
     @Override
     public Scene display() {
-        game = new Game();
+        game = new Game(this);
 
         //////////////
         // Top Menu //
@@ -71,7 +72,11 @@ public class GameScreen implements ApplicationScreen {
         totalWords.setFont(new Font(20));
         Label wordsOutOfTotal = new Label(game.getInputWords().size() + "/" + game.getPossibleWords().size()); // Input Words/Possible Words
         Button testButton = new Button("Reset"); // DEBUGGING - Reset Button
-        testButton.setOnAction(e -> Main.setWindow(new StartScreen())); // Lambda Statement to runt he code within to display the startscreen if the reset button is clicked.
+        testButton.setOnAction(e -> {
+            Main.setWindow(new StartScreen());
+            game.getTimer().stop();
+            Main.getGameFileHandler().addToDatabase(game.save());
+        }); // Lambda Statement to runt he code within to display the startscreen if the reset button is clicked.
         rightMenu.getChildren().addAll(totalWords, wordsOutOfTotal, testButton);
         rightMenu.setAlignment(Pos.CENTER);
 
@@ -198,7 +203,7 @@ public class GameScreen implements ApplicationScreen {
     }
 
     // CREATES A GRIDPANE OF BUTTONS
-    private static GridPane createGridPane(GridPane boardLayout, Button[][] boardButtons) {
+    private GridPane createGridPane(GridPane boardLayout, Button[][] boardButtons) {
         boardLayout.setPadding(new Insets(8, 8, 8, 8));
         boardLayout.setVgap(8);
         boardLayout.setHgap(8);
@@ -214,7 +219,7 @@ public class GameScreen implements ApplicationScreen {
     }
 
     // RESETS THE BUTTON COLORS ONCE SUBMITTED
-    public static void resetAllButtonColors() {
+    public void resetAllButtonColors() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 boardButtons[i][j].setStyle("-fx-background-color: #D3D3D3");
@@ -223,12 +228,12 @@ public class GameScreen implements ApplicationScreen {
     }
 
     // GETS THE SCORE FROM THE "GAME" CLASS
-    public static void setScoreAmount(int score) {
+    public void setScoreAmount(int score) {
         scoreAmount.setText(Integer.toString(score));
     }
 
     // GETS THE REMAINING TIME FROM THE "GAME" CLASS
-    public static void setTimeAmount(int time) {
+    public void setTimeAmount(int time) {
         timeAmount.setText(Integer.toString(time));
     }
 
