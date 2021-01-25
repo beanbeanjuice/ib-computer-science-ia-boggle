@@ -12,6 +12,8 @@ public class GameFileHandler {
 
         System.out.println("tried");
         Connection connection = Main.getSQLServer().getConnection();
+
+        // MySQL Syntax for retrieving data.
         String arguments = "INSERT INTO GameData " +
                 "(GameID, Score, BoardCharacters, TimeTaken, TimeAllowed, WordsFound, TotalWords) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";

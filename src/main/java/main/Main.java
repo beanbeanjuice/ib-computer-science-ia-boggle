@@ -59,7 +59,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
 
         window = primaryStage;
         setWindow(new StartScreen());
@@ -73,7 +73,7 @@ public class Main extends Application {
             startMySQLConnection();
             System.out.println("Successfully connected to the database.");
 
-        } catch (SQLException e) {
+        } catch (SQLException e) { // This will throw an error if the database is unreachable.
             window.setScene(new MySQLConnectionErrorScreen().display());
         }
 
@@ -88,18 +88,23 @@ public class Main extends Application {
             if (currentScreen.getName().equals("GameScreen")) {
                 // Save Game Stuff
 
-                Game game = currentScreen.getGame();
-                game.getTimer().stop();
-                PreviousGame previousGame = game.save();
-                boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
-                while (!successfulSave) {
-                    successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
-                }
+                saveGame();
             }
 
             System.out.println("Closed Program");
             window.close();
         }
+    }
+
+    public static void saveGame() {
+        Game game = currentScreen.getGame();
+        PreviousGame previousGame = game.save();
+        boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
+        while (!successfulSave) {
+            successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
+        }
+        setWindow(new StartScreen());
+        game.getTimer().stop();
     }
 
     /* ===========================================================================

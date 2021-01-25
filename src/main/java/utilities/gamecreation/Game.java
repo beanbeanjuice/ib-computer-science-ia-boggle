@@ -167,9 +167,7 @@ public class Game {
         spotsTaken = new boolean[4][4];
         wordStarted = false;
         characters = new Stack<>();
-
-        // TODO: Maybe do this in the game screen itself?
-        //gameScreen.resetAllButtonColors();
+        gameScreen.resetAllButtonColors();
     }
 
     // REMOVES THE LAST CHARACTER IN THE STRING (works with the Stack)
@@ -189,6 +187,11 @@ public class Game {
     public void setTimeLeft(int time) {
         timeLeft = time;
         gameScreen.setTimeAmount(time);
+    }
+
+    // Gets the time left
+    public int getTimeLeft() {
+        return timeLeft;
     }
 
     // Gets the current timer.

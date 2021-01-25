@@ -73,10 +73,9 @@ public class GameScreen implements ApplicationScreen {
         Label wordsOutOfTotal = new Label(game.getInputWords().size() + "/" + game.getPossibleWords().size()); // Input Words/Possible Words
         Button testButton = new Button("Reset"); // DEBUGGING - Reset Button
         testButton.setOnAction(e -> {
+            Main.saveGame();
             Main.setWindow(new StartScreen());
-            game.getTimer().stop();
-            Main.getGameFileHandler().addToDatabase(game.save());
-        }); // Lambda Statement to runt he code within to display the startscreen if the reset button is clicked.
+        }); // Lambda Statement to run the code within to display the startscreen if the reset button is clicked.
         rightMenu.getChildren().addAll(totalWords, wordsOutOfTotal, testButton);
         rightMenu.setAlignment(Pos.CENTER);
 

@@ -50,6 +50,14 @@ public class Timer implements Runnable {
             }
 
             game.setTimeLeft(getTimeLeft(System.currentTimeMillis()));
+
+            if (game.getTimeLeft() <= 0) {
+                stop();
+                // TODO: Fix this
+//                if (!Main.getIgnoreTimeLimit()) {
+//                    Main.saveGame();
+//                }
+            }
         }
     }
 
