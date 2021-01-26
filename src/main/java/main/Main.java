@@ -27,6 +27,9 @@ public class Main extends Application {
     private static final int BUTTON_WIDTH = 175;
     private static final int BUTTON_TEXT_SIZE = 18;
     private static final int TITLE_SIZE = 24;
+    private static final String TITLE_FONT = "Roboto-BoldItalic.ttf";
+    private static final String BUTTON_FONT = "Roboto-Regular.ttf";
+    private static final String TEXT_FONT = "Roboto-MediumItalic.ttf";
 
     private static boolean allowIncorrect;
     private static boolean ignoreTimeLimit;
@@ -202,6 +205,21 @@ public class Main extends Application {
     // Gets the settings handler
     public static SettingsHandler getSettingsHandler() {
         return settingsHandler;
+    }
+
+    // Gets the filename for the title font
+    public static String getTitleFont() {
+        return TITLE_FONT;
+    }
+
+    // Gets the filename for the button font
+    public static String getButtonFont() {
+        return BUTTON_FONT;
+    }
+
+    // Gets the filename for the text font
+    public static String getTextFont() {
+        return TEXT_FONT;
     }
 
 }

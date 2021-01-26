@@ -1,5 +1,6 @@
 package screens;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,14 +48,30 @@ public class PreviousGamesScreen implements ApplicationScreen {
         wordsFound.setCellValueFactory(new PropertyValueFactory<>("wordsFound"));
         totalWords.setCellValueFactory(new PropertyValueFactory<>("totalWords"));
 
-        gameID.setPrefWidth(60);
-        score.setPrefWidth(100);
-        timeTaken.setPrefWidth(100);
-        timeAllowed.setPrefWidth(100);
-        wordsFound.setPrefWidth(100);
-        totalWords.setPrefWidth(100);
+        gameID.setId("table-text");
+        score.setId("table-text");
+        timeTaken.setId("table-text");
+        timeAllowed.setId("table-text");
+        wordsFound.setId("table-text");
+        totalWords.setId("table-text");
+
+        // Prevent the table from being reordered.
+        gameID.impl_setReorderable(false);
+        score.impl_setReorderable(false);
+        timeTaken.impl_setReorderable(false);
+        timeAllowed.impl_setReorderable(false);
+        wordsFound.impl_setReorderable(false);
+        totalWords.impl_setReorderable(false);
+
+        gameID.setPrefWidth(100);
+        score.setPrefWidth(90);
+        timeTaken.setPrefWidth(120);
+        timeAllowed.setPrefWidth(120);
+        wordsFound.setPrefWidth(120);
+        totalWords.setPrefWidth(120);
 
         table.getColumns().addAll(gameID, score, timeTaken, timeAllowed, wordsFound, totalWords);
+        table.setId("table-text");
 
         for (PreviousGame previousGame : previousGames) {
             table.getItems().add(previousGame);
@@ -62,13 +79,18 @@ public class PreviousGamesScreen implements ApplicationScreen {
 
         // Self explanatory label
         Label label = new Label("Previous Games");
+        label.setId("title");
         VBox layout = new VBox(20);
+        layout.setPadding(new Insets(10, 10, 10, 10));
         layout.getChildren().addAll(label, table, goBack);
         layout.setAlignment(Pos.CENTER);
         // Put the GridPane in a ScrollPane
         // Put the ScrollPane in a VBox
 
         previousGamesScreen = new Scene(layout, 1000, 600);
+
+        // CSS
+        previousGamesScreen.getStylesheets().add("css/previous-games-style.css");
 
         return previousGamesScreen;
     }

@@ -1,5 +1,6 @@
 package utilities.boxes;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,6 +30,7 @@ public class ConfirmationBox {
         window.setMinWidth(250);
         Label label = new Label();
         label.setText(message);
+        label.setId("text");
 
         int buttonWidth = Main.getButtonWidth();
         int buttonTextSize = Main.getButtonTextSize();
@@ -57,8 +59,14 @@ public class ConfirmationBox {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(label, yesButton, noButton);
         layout.setAlignment(Pos.CENTER); // Centers everything
+        layout.setPadding(new Insets(10, 10, 10, 10));
         Scene scene = new Scene(layout);
+
+        // CSS
+        scene.getStylesheets().add("css/main-style.css");
+
         window.setScene(scene);
+
         window.showAndWait(); // Display it, but needs to be closed before it can be returned to the original window.
 
         return answer;

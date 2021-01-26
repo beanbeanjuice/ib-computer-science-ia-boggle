@@ -1,5 +1,6 @@
 package utilities.boxes;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +33,7 @@ public class SettingsBox {
 
         // Time Settings
         Label time = new Label("Time (in Minutes):");
+        time.setId("text");
         ComboBox<String> timeInput = new ComboBox<>();
         timeInput.getItems().addAll(
                 "6.0",
@@ -42,11 +44,13 @@ public class SettingsBox {
                 "1.0"
         );
         timeInput.setEditable(true);
+        timeInput.setId("text-no-bold");
         timeInput.getSelectionModel().select(Double.toString(Main.getTimeLimit()));
 
 
         // Allow for Input after Time Ends
         CheckBox ignoreTimeLimit = new CheckBox("Ignore Time Limit");
+        ignoreTimeLimit.setId("text");
         ignoreTimeLimit.setSelected(Main.getIgnoreTimeLimit());
 
         Button saveButton = new Button("Save Settings");
@@ -77,8 +81,13 @@ public class SettingsBox {
         VBox layout = new VBox(10);
         layout.getChildren().addAll(time, timeInput, ignoreTimeLimit, saveButton);
         layout.setAlignment(Pos.CENTER); // Centers everything
+        layout.setPadding(new Insets(10, 10, 10, 10));
 
         Scene scene = new Scene(layout);
+
+        // CSS
+        scene.getStylesheets().add("css/main-style.css");
+
         window.setScene(scene);
         window.showAndWait(); // Display it, but needs to be closed before it can be returned to the original window.
     }

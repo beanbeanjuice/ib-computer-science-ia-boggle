@@ -20,6 +20,7 @@ public class RulesScreen implements ApplicationScreen {
         goBack.setOnAction(e -> Main.setWindow(new StartScreen()));
 
         Label label = new Label("Rules");
+        label.setId("title");
         label.setFont(new Font(Main.getTitleSize()));
 
         // VBOX FOR RULES
@@ -39,6 +40,9 @@ public class RulesScreen implements ApplicationScreen {
         layout.setAlignment(Pos.CENTER);
 
         rulesScreen = new Scene(layout, 1000, 600);
+
+        // CSS
+        rulesScreen.getStylesheets().add("css/main-style.css");
 
         return rulesScreen;
     }

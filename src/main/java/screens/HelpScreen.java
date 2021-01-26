@@ -1,5 +1,6 @@
 package screens;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,7 +35,8 @@ public class HelpScreen implements ApplicationScreen {
 
         // Video Properties
         mediaView.setFitHeight(480);
-        mediaView.setFitWidth(858);
+        mediaView.setFitWidth(720);
+        mediaView.autosize();
         mediaPlayer.setMute(true);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.play();
@@ -47,11 +49,16 @@ public class HelpScreen implements ApplicationScreen {
 
         // Scene layout
         Label label = new Label("Help");
+        label.setId("title");
         VBox layout = new VBox(20);
         layout.getChildren().addAll(label, mediaView, goBack);
         layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(10, 10, 10, 10));
 
         helpScreen = new Scene(layout, 1000, 600);
+
+        // CSS
+        helpScreen.getStylesheets().add("css/main-style.css");
 
         return helpScreen;
     }

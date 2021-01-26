@@ -35,6 +35,9 @@ public class MySQLConnectionErrorScreen implements ApplicationScreen {
 
         mySQLConnectionErrorScreen = new Scene(layout, 1000, 600);
 
+        // CSS
+        mySQLConnectionErrorScreen.getStylesheets().add("css/main-style.css");
+
         return mySQLConnectionErrorScreen;
     }
 

@@ -104,10 +104,23 @@ public class Game {
             return Math.sqrt(((x - characters.peek().getX()) * (x - characters.peek().getX())) + ((y - characters.peek().getY()) * (y - characters.peek().getY()))) < 2;
         }
 
-        poppedCharacter = characters.pop();
-
         int currentX = characters.peek().getX();
         int currentY = characters.peek().getY();
+
+        /* INFORMATION
+        Prevents the user from moving their
+        mouse around inside a single button
+        and thus allowing the same button to
+        be chosen.
+         */
+        if (x == currentX && y == currentY) {
+            return false;
+        }
+
+        poppedCharacter = characters.pop();
+
+        currentX = characters.peek().getX();
+        currentY = characters.peek().getY();
 
         if (x == currentX && y == currentY) {
             hasPopped = true;

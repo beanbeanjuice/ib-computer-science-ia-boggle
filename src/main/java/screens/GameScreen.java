@@ -35,26 +35,29 @@ public class GameScreen implements ApplicationScreen {
         //////////////
 
         // THE "SCORE" PORTION OF THE TOP MENU
-        HBox score = new HBox(20); // Creates a new horizontal box
+        VBox score = new VBox(5); // Creates a new horizontal box
         Label scoreLabel = new Label("Score"); // Creates a new label with the text "score" shown on it.
-        scoreLabel.setFont(new Font(20)); // Makes the font of the label size 20.
+        scoreLabel.setId("text");
         scoreAmount = new TextField(""); // Creates a new empty text field.
         scoreAmount.setEditable(false); // Makes the text field not editable.
-        scoreAmount.setFont(new Font(20));
+        scoreAmount.setId("game-box");
         scoreAmount.setMaxWidth(100); // Makes the maximum width of the text field 100 pixels.
         score.getChildren().addAll(scoreLabel, scoreAmount); // Adds the label and text field to the score HBox.
         score.setAlignment(Pos.CENTER); // Centers the HBox.
+        score.setPadding(new Insets(0, 0, 0, 40));
 
         // THE "TIME" PORTION OF THE TOP MENU
-        HBox timeLeft = new HBox(20);
+        VBox timeLeft = new VBox(5);
         Label timeLabel = new Label("Time Left");
+        timeLabel.setId("text");
         timeLabel.setFont(new Font(20));
         timeAmount = new TextField("");
         timeAmount.setEditable(false);
-        timeAmount.setFont(new Font(20));
+        timeAmount.setId("game-box");
         timeAmount.setMaxWidth(100);
         timeLeft.getChildren().addAll(timeLabel, timeAmount);
         timeLeft.setAlignment(Pos.CENTER);
+        timeLeft.setPadding(new Insets(0, 40, 0, 0));
 
         // CREATION OF THE TOPMENU TO THEN BE PUT INTO THE OUTER BORDERPANE
         BorderPane topMenu = new BorderPane();
@@ -66,16 +69,17 @@ public class GameScreen implements ApplicationScreen {
         ////////////////
         // Right Menu //
         ////////////////
-        VBox rightMenu = new VBox(20);
+        VBox rightMenu = new VBox(5);
         Label totalWords = new Label("Total Words");
-        totalWords.setFont(new Font(20));
+        totalWords.setId("text");
         Label wordsOutOfTotal = new Label(game.getInputWords().size() + "/" + game.getPossibleWords().size()); // Input Words/Possible Words
-        Button testButton = new Button("Reset"); // DEBUGGING - Reset Button
-        testButton.setOnAction(e -> {
+        wordsOutOfTotal.setId("text");
+        Button quitButton = new Button("Quit");
+        quitButton.setOnAction(e -> {
             Main.saveGame();
             Main.setWindow(new StartScreen());
         }); // Lambda Statement to run the code within to display the startscreen if the reset button is clicked.
-        rightMenu.getChildren().addAll(totalWords, wordsOutOfTotal, testButton);
+        rightMenu.getChildren().addAll(totalWords, wordsOutOfTotal, quitButton);
         rightMenu.setAlignment(Pos.CENTER);
 
         ///////////////
@@ -83,48 +87,28 @@ public class GameScreen implements ApplicationScreen {
         ///////////////
         VBox leftMenu = new VBox(20);
         Label previousWordsLabel = new Label("Previous words");
-        previousWordsLabel.setFont(new Font(20));
+        previousWordsLabel.setId("text");
         ListView<String> previousWords = new ListView<>(); // Shows the inputWords arrayList from the "Game" class.
         previousWords.setMaxWidth(175);
         previousWords.getItems().addAll(game.getInputWords()); // Should be INPUT WORDS instead. Make sure to change this eventually.
         leftMenu.getChildren().addAll(previousWordsLabel, previousWords);
         leftMenu.setAlignment(Pos.CENTER);
+        leftMenu.setPadding(new Insets(20, 0, 0, 0));
 
         /////////////////
         // Bottom Menu //
         /////////////////
         GridPane bottomMenu = new GridPane();
-        Label currentWord = new Label("Current Word:");
-        currentWord.setFont(new Font(20));
 
         letterBuild = new TextField("");
-        letterBuild.setFont(new Font(20));
+        letterBuild.setId("text");
         letterBuild.setEditable(false);
 
-        /*
-        Eventually, it should be a mouse click and drag and let go situation.
-        The user should not have to click each individual letter.
-        The user should not have to click submit at the end.
-        */
-
-        // TODO: Eventually remove the submit button
-        Button submit = new Button("Submit");
-        submit.setOnAction(e -> { // Lambda statement for what the button should do.
-            if (game.compareWord()) {
-                previousWords.getItems().setAll(game.getInputWords());
-            }
-            wordsOutOfTotal.setText(game.getInputWords().size() + "/" + game.getPossibleWords().size());
-            letterBuild.setText("");
-            game.resetCharacterBuild(this); // Resets the characterbuilder and board after each submission.
-
-        });
         bottomMenu.setPadding(new Insets(8, 8, 8, 8)); // Padding from the sides of the window.
         bottomMenu.setVgap(8); // Vertical Gap
         bottomMenu.setHgap(8); // Horizontal Gap
-        GridPane.setConstraints(currentWord, 0, 0); // Column, Row
         GridPane.setConstraints(letterBuild, 1, 0);
-        GridPane.setConstraints(submit, 0, 1);
-        bottomMenu.getChildren().addAll(currentWord, letterBuild, submit);
+        bottomMenu.getChildren().addAll(letterBuild);
         bottomMenu.setAlignment(Pos.CENTER);
 
         /////////////////
@@ -145,6 +129,7 @@ public class GameScreen implements ApplicationScreen {
         borderPane.setCenter(boardLayout);
         borderPane.setLeft(leftMenu);
         borderPane.setBottom(bottomMenu);
+        borderPane.setPadding(new Insets(20, 20, 20, 20));
         gameScreen = new Scene(borderPane, 1000, 600);
 
         // MOUSE DRAGGED STUFF
@@ -152,13 +137,15 @@ public class GameScreen implements ApplicationScreen {
         gameScreen.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
             if (game.compareWord()) {
                 previousWords.getItems().setAll(game.getInputWords());
+                previousWords.scrollTo(game.getInputWords().size() - 1);
             }
             wordsOutOfTotal.setText(game.getInputWords().size() + "/" + game.getPossibleWords().size());
             letterBuild.setText("");
             game.resetCharacterBuild(this); // Resets the characterbuilder and board after each submission.
         });
-        // TODO: Button dragging is a little wonky.
-        // TODO: Detect that when the user lets go after a drag, submit the word.
+
+        // CSS
+        gameScreen.getStylesheets().add("css/main-style.css");
 
         return gameScreen;
     }
@@ -172,6 +159,10 @@ public class GameScreen implements ApplicationScreen {
                 // Makes a 2D array of Buttons
                 // Allows for expandability (4x4, 6x6, 8x8, etc in the future)
                 boardButtons[i][j] = new Button(board[i][j]);
+                boardButtons[i][j].getStyleClass().add("button-board");
+
+                // This is required so that the button hitboxes are circular.
+                boardButtons[i][j].setPickOnBounds(false);
                 int finalI = i;
                 int finalJ = j;
 
