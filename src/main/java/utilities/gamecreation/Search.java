@@ -21,20 +21,6 @@ public class Search {
             }
         }
 
-        System.out.println();
-        for (String string : possibleWords) {
-            System.out.println(string);
-        }
-        System.out.println();
-
-        // DEBUGGING: PRINTS OUT THE 2D ARRAY
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(game.getBoard()[i][j]);
-            }
-            System.out.println();
-        }
-
         return possibleWords;
     }
 
@@ -44,13 +30,7 @@ public class Search {
         StringBuilder string = new StringBuilder(word); // Creates a new string builder. Basically word += board[x][y]
         word = string.append(board[x][y]).toString();
 
-        // DEBUGGING: PRINTS OUT WHAT LETTER THE RECURSIVE METHOD IS CURRENTLY ON
-        /*if (word.length() == 1) {
-            System.out.println(word);
-        }*/
-
         if (word.length() >= 3 && Main.getDictionaryHandler().traverseDictionaryTree(word) && !possibleWords.contains(word)) {
-            //System.out.println("Added " + word); // Debugging: Shows which words are being added in real-time.
             addWord(word);
         }
 

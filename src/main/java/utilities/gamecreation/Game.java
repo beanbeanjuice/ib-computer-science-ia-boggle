@@ -25,6 +25,7 @@ public class Game {
     private boolean hasPopped = false;
     private Timer timer;
     private GameScreen gameScreen;
+    private BoardCharacter poppedCharacter;
 
     public Game(GameScreen gameScreen) {
         board = Main.getBoardHandler().randomize(); // Creates a new board.
@@ -99,45 +100,29 @@ public class Game {
             return true;
         }
 
+        if (!spotsTaken[x][y]) { // Makes sure the user can only choose boxes that are up, left, down, right, and diagonal to itself by 1 place.
+            return Math.sqrt(((x - characters.peek().getX()) * (x - characters.peek().getX())) + ((y - characters.peek().getY()) * (y - characters.peek().getY()))) < 2;
+        }
+
+        poppedCharacter = characters.pop();
+
         int currentX = characters.peek().getX();
         int currentY = characters.peek().getY();
 
         if (x == currentX && y == currentY) {
-            System.out.println("Current x and current y");
+            hasPopped = true;
+            // Remove the last character from the string
+            //spotsTaken[currentX][currentY] = false;
+            spotsTaken[poppedCharacter.getX()][poppedCharacter.getY()] = false;
+            characterBuilder = removeLastCharacter(characterBuilder);
+            if (characters.empty()) { // If there are no more characters to pop, the word has no longer "started".
+                wordStarted = false;
+            }
             return false;
         }
 
-        BoardCharacter character = characters.pop();
-        if (characters.isEmpty()) {
-            System.out.println("is empty");
-            wordStarted = false;
-        } else {
-            currentX = characters.peek().getX();
-            currentY = characters.peek().getY();
-
-            if (x == currentX && y == currentY) {
-                System.out.println("is undoing");
-            /*
-            This code is so that if the user clicks the same spot,
-            it counts as an "undo" and pops it off of the stack.
-            */
-                //characters.pop();
-                hasPopped = true;
-                // Remove the last character from the string
-                spotsTaken[currentX][currentY] = false;
-                characterBuilder = removeLastCharacter(characterBuilder);
-                if (characters.empty()) { // If there are no more characters to pop, the word has no longer "started".
-                    wordStarted = false;
-                }
-                return false;
-            }
-        }
-
-        characters.push(character);
-
-        if (!spotsTaken[x][y]) { // Makes sure the user can only choose boxes that are up, left, down, right, and diagonal to itself by 1 place.
-            return Math.sqrt(((x - characters.peek().getX()) * (x - characters.peek().getX())) + ((y - characters.peek().getY()) * (y - characters.peek().getY()))) < 2;
-        }
+        // If the above if statement fails, add the character back to the stack.
+        characters.push(poppedCharacter);
         return false;
     }
 
@@ -196,6 +181,11 @@ public class Game {
     // Gets the current timer.
     public Timer getTimer() {
         return timer;
+    }
+
+    // Gets the popped character.
+    public BoardCharacter getPoppedCharacter() {
+        return poppedCharacter;
     }
 
 }

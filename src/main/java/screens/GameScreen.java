@@ -106,6 +106,8 @@ public class GameScreen implements ApplicationScreen {
         The user should not have to click each individual letter.
         The user should not have to click submit at the end.
         */
+
+        // TODO: Eventually remove the submit button
         Button submit = new Button("Submit");
         submit.setOnAction(e -> { // Lambda statement for what the button should do.
             if (game.compareWord()) {
@@ -147,6 +149,14 @@ public class GameScreen implements ApplicationScreen {
 
         // MOUSE DRAGGED STUFF
         gameScreen.addEventFilter(MouseEvent.DRAG_DETECTED, event -> gameScreen.startFullDrag());
+        gameScreen.addEventFilter(MouseEvent.MOUSE_RELEASED, event -> {
+            if (game.compareWord()) {
+                previousWords.getItems().setAll(game.getInputWords());
+            }
+            wordsOutOfTotal.setText(game.getInputWords().size() + "/" + game.getPossibleWords().size());
+            letterBuild.setText("");
+            game.resetCharacterBuild(this); // Resets the characterbuilder and board after each submission.
+        });
         // TODO: Button dragging is a little wonky.
         // TODO: Detect that when the user lets go after a drag, submit the word.
 
@@ -173,13 +183,12 @@ public class GameScreen implements ApplicationScreen {
 
                         // Set colors according to rules of boggle. Sets it blue if it works, white if not.
                         boardButtons[finalI][finalJ].setStyle("-fx-background-color: #ADD8E6");
-                    } else if (boardButtons[finalI][finalJ].getStyle().equals("-fx-background-color: #ADD8E6") && game.getHasPopped()) {
-                        boardButtons[finalI][finalJ].setStyle("-fx-background-color: #D3D3D3");
+                    } else if (game.getHasPopped()) {
+                        boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter().getY()].setStyle("-fx-background-color: #D3D3D3");
                         game.setHasPopped(false);
                     }
 
                     letterBuild.setText(game.getCharacterBuild()); // Sets the "output" to the current String build
-                    System.out.println(game.getCharacterBuild()); // Debugging
                 });
 
                 // BUTTON LOOK CUSTOMIZATION
