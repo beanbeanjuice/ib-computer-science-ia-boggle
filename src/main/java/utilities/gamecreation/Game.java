@@ -188,4 +188,9 @@ public class Game {
         return poppedCharacter;
     }
 
+    // Gets the size of the current stack
+    public int getStackSize() {
+        return characters.size();
+    }
+
 }

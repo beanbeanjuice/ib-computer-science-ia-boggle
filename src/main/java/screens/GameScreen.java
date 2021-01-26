@@ -182,9 +182,11 @@ public class GameScreen implements ApplicationScreen {
                         game.addCharacterBuild(letter, finalI, finalJ);
 
                         // Set colors according to rules of boggle. Sets it blue if it works, white if not.
-                        boardButtons[finalI][finalJ].setStyle("-fx-background-color: #ADD8E6");
+                        //boardButtons[finalI][finalJ].setStyle("-fx-background-color: #ADD8E6");
+                        boardButtons[finalI][finalJ].setStyle("-fx-background-color: " + getColorHex(game.getStackSize()));
                     } else if (game.getHasPopped()) {
-                        boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter().getY()].setStyle("-fx-background-color: #D3D3D3");
+                        boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter().getY()].setStyle("-fx-background-color: "
+                                + getColorHex(0));
                         game.setHasPopped(false);
                     }
 
@@ -201,7 +203,7 @@ public class GameScreen implements ApplicationScreen {
                 boardButtons[i][j].setMinHeight(80);
 
                 // Sets the background color of the button to a neutral color.
-                boardButtons[i][j].setStyle("-fx-background-color: #D3D3D3");
+                boardButtons[i][j].setStyle("-fx-background-color: " + getColorHex(0));
             }
         }
 
@@ -229,7 +231,7 @@ public class GameScreen implements ApplicationScreen {
     public void resetAllButtonColors() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                boardButtons[i][j].setStyle("-fx-background-color: #D3D3D3");
+                boardButtons[i][j].setStyle("-fx-background-color: " + getColorHex(0));
             }
         }
     }
@@ -252,6 +254,28 @@ public class GameScreen implements ApplicationScreen {
     @Override
     public Game getGame() {
         return game;
+    }
+
+    public String getColorHex(int amount) {
+        switch (amount) {
+            case 1: return "#ADD8E6";
+            case 2: return "#a1d5e6";
+            case 3: return "#70b7cf";
+            case 4: return "#5ca6bf";
+            case 5: return "#4493ad";
+            case 6: return "#33829c";
+            case 7: return "#27758f";
+            case 8: return "#1c6c87";
+            case 9: return "#13799c";
+            case 10: return "#0e8ab5";
+            case 11: return "#0a9ed1";
+            case 12: return "#05ace6";
+            case 13: return "#00bdff";
+            case 14: return "#1472b5";
+            case 15: return "#1380cf";
+            case 16: return "#098ceb";
+            default: return "#D3D3D3";
+        }
     }
 
 
