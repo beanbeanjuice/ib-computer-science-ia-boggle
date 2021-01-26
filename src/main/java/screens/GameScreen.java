@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
 import utilities.gamecreation.Game;
-import utilities.handlers.GameFileHandler;
 import utilities.screens.ApplicationScreen;
 
 public class GameScreen implements ApplicationScreen {

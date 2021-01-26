@@ -1,4 +1,4 @@
-package utilities.handlers;
+package utilities.handlers.sql;
 
 import main.Main;
 import utilities.gamecreation.PreviousGame;
@@ -10,7 +10,6 @@ public class GameFileHandler {
 
     public boolean addToDatabase(PreviousGame game) {
 
-        System.out.println("tried");
         Connection connection = Main.getSQLServer().getConnection();
 
         // MySQL Syntax for retrieving data.

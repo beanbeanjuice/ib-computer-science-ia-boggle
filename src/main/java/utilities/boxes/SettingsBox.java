@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Main;
+import utilities.handlers.Setting;
 
 public class SettingsBox {
 
@@ -28,10 +29,6 @@ public class SettingsBox {
         window.initModality(Modality.APPLICATION_MODAL); // Block input events from other windows in the application
         window.setTitle(title);
         window.setMinWidth(250);
-
-        // Allow incorrect words to be input
-        CheckBox allowIncorrect = new CheckBox("Allow Incorrect Words");
-        allowIncorrect.setSelected(Main.getAllowIncorrect());
 
         // Time Settings
         Label time = new Label("Time (in Minutes):");
@@ -57,10 +54,19 @@ public class SettingsBox {
             String number = timeInput.getValue();
 
             if (checkDouble(timeInput, number)) {
-                Main.setTimeLimit(Double.parseDouble(timeInput.getValue()));
+                double num = Double.parseDouble(timeInput.getValue());
+                boolean isSelected = ignoreTimeLimit.isSelected();
+                int bit = 0;
 
-                Main.setIgnoreTimeLimit(ignoreTimeLimit.isSelected());
-                Main.setAllowIncorrect(allowIncorrect.isSelected());
+                if (isSelected) {
+                    bit = 1;
+                } else {
+                    bit = 0;
+                }
+
+                Main.setTimeLimit(num);
+                Main.setIgnoreTimeLimit(isSelected);
+                Main.getSettingsHandler().updateSettings(new Setting(num, bit));
                 window.close();
             } else {
                 // TODO: Eventually show an error message that says "Only numbers are accepted."
@@ -68,7 +74,7 @@ public class SettingsBox {
         });
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(time, timeInput, allowIncorrect, ignoreTimeLimit, saveButton);
+        layout.getChildren().addAll(time, timeInput, ignoreTimeLimit, saveButton);
         layout.setAlignment(Pos.CENTER); // Centers everything
 
         Scene scene = new Scene(layout);

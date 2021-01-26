@@ -53,7 +53,7 @@ public class Timer implements Runnable {
 
             if (game.getTimeLeft() <= 0) {
                 stop();
-                // TODO: Fix this
+                // TODO: Fix this. Causes a thread issue.
 //                if (!Main.getIgnoreTimeLimit()) {
 //                    Main.saveGame();
 //                }

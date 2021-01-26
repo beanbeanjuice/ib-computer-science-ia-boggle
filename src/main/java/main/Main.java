@@ -10,7 +10,8 @@ import utilities.gamecreation.PreviousGame;
 import utilities.handlers.BoardHandler;
 import utilities.handlers.DictionaryHandler;
 import utilities.handlers.DistributionHandler;
-import utilities.handlers.GameFileHandler;
+import utilities.handlers.sql.GameFileHandler;
+import utilities.handlers.sql.SettingsHandler;
 import utilities.screens.ApplicationScreen;
 import utilities.sql.SQLServer;
 
@@ -39,21 +40,14 @@ public class Main extends Application {
     private static DictionaryHandler dictionaryHandler;
     private static DistributionHandler distributionHandler;
     private static BoardHandler boardHandler;
+    private static SettingsHandler settingsHandler;
 
     public static void main(String[] args) {
-        // TODO: new DictionaryHandler();
-        // TODO: Get game time from settings file
-        timeLimit = 5;
-        // TODO: Get if should ignore time limit from game file
-        ignoreTimeLimit = false;
-        // TODO: Get if should ignore incorrect
-        allowIncorrect = false;
-
-        // TODO: Maybe get the settings from the database?
         dictionaryHandler = new DictionaryHandler();
         distributionHandler = new DistributionHandler();
         boardHandler = new BoardHandler(distributionHandler);
         gameFileHandler = new GameFileHandler();
+        settingsHandler = new SettingsHandler();
 
         launch(args);
     }
@@ -72,6 +66,20 @@ public class Main extends Application {
         try {
             startMySQLConnection();
             System.out.println("Successfully connected to the database.");
+
+            // TODO: Get game time from settings file
+            timeLimit = settingsHandler.getFromDataBase().getNum();
+            // TODO: Get if should ignore time limit from game file
+            int bit = settingsHandler.getFromDataBase().getBit();
+
+            if (bit == 0) {
+                ignoreTimeLimit = false;
+            } else {
+                ignoreTimeLimit = true;
+            }
+            // TODO: Get if should ignore incorrect
+
+            // TODO: Maybe get the settings from the database?
 
         } catch (SQLException e) { // This will throw an error if the database is unreachable.
             window.setScene(new MySQLConnectionErrorScreen().display());
@@ -198,6 +206,11 @@ public class Main extends Application {
     // Gets the title size
     public static int getTitleSize() {
         return TITLE_SIZE;
+    }
+
+    // Gets the settings handler
+    public static SettingsHandler getSettingsHandler() {
+        return settingsHandler;
     }
 
 }
