@@ -58,10 +58,11 @@ public class SettingsBox {
                 boolean isSelected = ignoreTimeLimit.isSelected();
                 int bit = 0;
 
+                // MySQL does not truly support booleans
+                // 1s and 0s are to be used instead.
+
                 if (isSelected) {
                     bit = 1;
-                } else {
-                    bit = 0;
                 }
 
                 Main.setTimeLimit(num);

@@ -39,7 +39,6 @@ public class Game {
     }
 
     public PreviousGame save() {
-        // TODO: Get gameID from database. Instead of "1", should be something else.
         return new PreviousGame(Main.getGameFileHandler().getFromDataBase().size() + 1, board, score, (Main.getTimeLimit() * 60) - timeLeft, Main.getTimeLimit() * 60, inputWords.size(), possibleWords.size());
     }
 

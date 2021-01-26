@@ -67,19 +67,10 @@ public class Main extends Application {
             startMySQLConnection();
             System.out.println("Successfully connected to the database.");
 
-            // TODO: Get game time from settings file
             timeLimit = settingsHandler.getFromDataBase().getNum();
-            // TODO: Get if should ignore time limit from game file
             int bit = settingsHandler.getFromDataBase().getBit();
 
-            if (bit == 0) {
-                ignoreTimeLimit = false;
-            } else {
-                ignoreTimeLimit = true;
-            }
-            // TODO: Get if should ignore incorrect
-
-            // TODO: Maybe get the settings from the database?
+            ignoreTimeLimit = bit != 0;
 
         } catch (SQLException e) { // This will throw an error if the database is unreachable.
             window.setScene(new MySQLConnectionErrorScreen().display());

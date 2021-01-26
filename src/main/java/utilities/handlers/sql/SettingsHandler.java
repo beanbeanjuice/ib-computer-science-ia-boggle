@@ -46,7 +46,7 @@ public class SettingsHandler {
                 setting.setBit(bit);
             }
         } catch (SQLException e) {
-            System.out.println("Error retrieving previous game data.");
+            System.out.println("Error saving settings. Using default settings.");
             // TODO: Show the user there was an error.
         }
 
