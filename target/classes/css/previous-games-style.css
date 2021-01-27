@@ -21,6 +21,13 @@
     -fx-font-weight: bold;
 }
 
+#information{
+    -fx-font-size: 20;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #E8E8E8;
+    -fx-font-weight: bold;
+}
+
 #table-text{
     -fx-font-size: 18;
     -fx-text-fill: black;

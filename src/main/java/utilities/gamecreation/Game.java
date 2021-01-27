@@ -40,7 +40,7 @@ public class Game {
     }
 
     public PreviousGame save() {
-        return new PreviousGame(Main.getGameFileHandler().getFromDataBase().size() + 1, board, score, (Main.getTimeLimit() * 60) - timeLeft, Main.getTimeLimit() * 60, inputWords.size(), possibleWords.size());
+        return new PreviousGame(Main.getGameFileHandler().getFromDataBase().size() + 1, board, score, (Main.getTimeLimit() * 60) - timeLeft, Main.getTimeLimit() * 60, inputWords.size(), possibleWords.size(), inputWords, possibleWords);
     }
 
     // METHOD FOR INCREASING SCORE AS PER THE RULES OF BOGGLE

@@ -29,6 +29,7 @@ public class MySQLConnectionErrorScreen implements ApplicationScreen {
         });
 
         javafx.scene.control.Label label = new Label("Database ERROR");
+        label.setId("title");
         VBox layout = new VBox(20);
         layout.getChildren().addAll(label, retry);
         layout.setAlignment(Pos.CENTER);

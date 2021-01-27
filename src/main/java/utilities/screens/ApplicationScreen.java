@@ -8,6 +8,7 @@ public interface ApplicationScreen {
     Scene display();
     String getName();
 
+    // Return null unless specified otherwise
     default Game getGame() {
         return null;
     }

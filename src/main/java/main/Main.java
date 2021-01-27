@@ -103,7 +103,10 @@ public class Main extends Application {
         PreviousGame previousGame = game.save();
         boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
         while (!successfulSave) {
-            successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
+            try {
+                Thread.sleep(500);
+                successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
+            } catch (InterruptedException ignored) {}
         }
         setWindow(new StartScreen());
         game.getTimer().stop();

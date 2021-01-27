@@ -159,6 +159,8 @@ public class GameScreen implements ApplicationScreen {
                 // Makes a 2D array of Buttons
                 // Allows for expandability (4x4, 6x6, 8x8, etc in the future)
                 boardButtons[i][j] = new Button(board[i][j]);
+
+                // Gets the style for "button-board" from CSS.
                 boardButtons[i][j].getStyleClass().add("button-board");
 
                 // This is required so that the button hitboxes are circular.
@@ -183,12 +185,6 @@ public class GameScreen implements ApplicationScreen {
 
                     letterBuild.setText(game.getCharacterBuild()); // Sets the "output" to the current String build
                 });
-
-                // Sets every button to a fixed size to keep everything even.
-                boardButtons[i][j].setMaxWidth(80);
-                boardButtons[i][j].setMinWidth(80);
-                boardButtons[i][j].setMaxHeight(80);
-                boardButtons[i][j].setMinHeight(80);
 
                 // Sets the background color of the button to a neutral color.
                 boardButtons[i][j].setStyle("-fx-background-color: " + getColorHex(0));

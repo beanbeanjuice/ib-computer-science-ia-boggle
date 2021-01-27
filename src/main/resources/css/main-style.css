@@ -46,7 +46,18 @@
     -fx-background-radius: 10;
 }
 
+.button:hover{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#A1EAD8, #cccccc);
+    -fx-background-radius: 10;
+}
+
 .button-board{
     -fx-background-radius: 200;
-    -fx-font-size: 30;
+    -fx-font-size: 25;
+    -fx-max-width: 80;
+    -fx-max-height: 80;
+    -fx-min-width: 80;
+    -fx-min-height: 80;
 }

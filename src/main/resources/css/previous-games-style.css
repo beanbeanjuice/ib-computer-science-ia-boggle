@@ -21,6 +21,13 @@
     -fx-font-weight: bold;
 }
 
+#information{
+    -fx-font-size: 20;
+    -fx-alignment: CENTER;
+    -fx-text-fill: #E8E8E8;
+    -fx-font-weight: bold;
+}
+
 #table-text{
     -fx-font-size: 18;
     -fx-text-fill: black;
@@ -32,5 +39,12 @@
     -fx-font-size: 18;
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#A4A29E, #CCCCCC);
+    -fx-background-radius: 10;
+}
+
+.button:hover{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#A1EAD8, #cccccc);
     -fx-background-radius: 10;
 }

@@ -3,11 +3,9 @@ package screens;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import main.Main;
 import utilities.gamecreation.PreviousGame;
@@ -20,7 +18,7 @@ public class PreviousGamesScreen implements ApplicationScreen {
     private Scene previousGamesScreen;
     private ArrayList<PreviousGame> previousGames;
     public String name = "PreviousGamesScreen";
-    private TableView table = new TableView();
+    private TableView<PreviousGame> table = new TableView<>();
 
     @Override
     public Scene display() {
@@ -33,6 +31,17 @@ public class PreviousGamesScreen implements ApplicationScreen {
 
         // Creating the Table of Game Data
         table.setEditable(true);
+
+        table.setRowFactory(e -> {
+            TableRow<PreviousGame> tableRow = new TableRow<>();
+            tableRow.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!tableRow.isEmpty())) {
+                    PreviousGame previousGame = tableRow.getItem();
+                    Main.setWindow(new PreviousGameScreen(previousGame.getGameID()));
+                }
+            });
+            return tableRow;
+        });
 
         TableColumn gameID = new TableColumn("Game ID");
         TableColumn score = new TableColumn("Score");
@@ -70,6 +79,10 @@ public class PreviousGamesScreen implements ApplicationScreen {
         wordsFound.setPrefWidth(120);
         totalWords.setPrefWidth(120);
 
+        gameID.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            System.out.println(event.getTarget().toString());
+        });
+
         table.getColumns().addAll(gameID, score, timeTaken, timeAllowed, wordsFound, totalWords);
         table.setId("table-text");
 
@@ -77,12 +90,20 @@ public class PreviousGamesScreen implements ApplicationScreen {
             table.getItems().add(previousGame);
         }
 
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Self explanatory label
-        Label label = new Label("Previous Games");
-        label.setId("title");
+        Label title = new Label("Previous Games");
+        title.setId("title");
+
+        Label information = new Label("Double click a row to visit the board.");
+        information.setId("information");
         VBox layout = new VBox(20);
-        layout.setPadding(new Insets(10, 10, 10, 10));
-        layout.getChildren().addAll(label, table, goBack);
+        VBox upper = new VBox(5);
+        upper.getChildren().addAll(title, information);
+        upper.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(10, 80, 10, 80));
+        layout.getChildren().addAll(upper, table, goBack);
         layout.setAlignment(Pos.CENTER);
         // Put the GridPane in a ScrollPane
         // Put the ScrollPane in a VBox
