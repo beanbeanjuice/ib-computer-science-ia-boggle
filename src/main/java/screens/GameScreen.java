@@ -238,22 +238,22 @@ public class GameScreen implements ApplicationScreen {
 
     public String getColorHex(int amount) {
         switch (amount) {
-            case 1: return "#ADD8E6";
-            case 2: return "#a1d5e6";
-            case 3: return "#70b7cf";
-            case 4: return "#5ca6bf";
-            case 5: return "#4493ad";
-            case 6: return "#33829c";
-            case 7: return "#27758f";
-            case 8: return "#1c6c87";
-            case 9: return "#13799c";
-            case 10: return "#0e8ab5";
-            case 11: return "#0a9ed1";
-            case 12: return "#05ace6";
-            case 13: return "#00bdff";
-            case 14: return "#1472b5";
-            case 15: return "#1380cf";
-            case 16: return "#098ceb";
+            case 1: return "#bdf1ff";
+            case 2: return "#b0eeff";
+            case 3: return "#a1ebff";
+            case 4: return "#91e8ff";
+            case 5: return "#80e4ff";
+            case 6: return "#70e1ff";
+            case 7: return "#61deff";
+            case 8: return "#4cd2f5";
+            case 9: return "#3bc0e3";
+            case 10: return "#2cafd1";
+            case 11: return "#20a7c9";
+            case 12: return "#1d99b8";
+            case 13: return "#158fad";
+            case 14: return "#0e809c";
+            case 15: return "#087e9c";
+            case 16: return "#036a85";
             default: return "#D3D3D3";
         }
     }
