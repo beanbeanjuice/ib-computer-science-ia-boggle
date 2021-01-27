@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
@@ -101,7 +100,6 @@ public class GameScreen implements ApplicationScreen {
         boardButtons = setButtons(new Button[4][4], game.getBoard());
         GridPane boardLayout = createGridPane(new GridPane(), boardButtons);
         boardLayout.setAlignment(Pos.CENTER);
-        // TODO: Currently, accidental button presses are present because the buttons are not far enough apart.
         boardLayout.setVgap(20);
         boardLayout.setHgap(20);
 

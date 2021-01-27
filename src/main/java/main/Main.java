@@ -108,7 +108,6 @@ public class Main extends Application {
                 successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
             } catch (InterruptedException ignored) {}
         }
-        setWindow(new StartScreen());
         game.getTimer().stop();
     }
 
