@@ -59,14 +59,24 @@ public class StartScreen implements ApplicationScreen {
         closeButton.setMaxWidth(buttonWidth);
         closeButton.setMinWidth(buttonWidth);
 
+        // COMBINATION OF START AND PREVIOUS GAMES
+        HBox combo1 = new HBox(5);
+        combo1.getChildren().addAll(startButton, previousGamesButton);
+        combo1.setAlignment(Pos.CENTER);
+
         // COMBINATION OF HELP AND RULES BUTTON
-        HBox combo = new HBox(5);
-        combo.getChildren().addAll(rulesButton, helpButton);
-        combo.setAlignment(Pos.CENTER);
+        HBox combo2 = new HBox(5);
+        combo2.getChildren().addAll(rulesButton, helpButton);
+        combo2.setAlignment(Pos.CENTER);
+
+        // COMBINATION OF SETTINGS AND CLOSE BUTTON
+        HBox combo3 = new HBox(5);
+        combo3.getChildren().addAll(settingsButton, closeButton);
+        combo3.setAlignment(Pos.CENTER);
 
         // Layout 1 - children are laid out in a vertical column
         VBox layout1 = new VBox(10);
-        layout1.getChildren().addAll(label1, startButton, combo, previousGamesButton, settingsButton, closeButton);
+        layout1.getChildren().addAll(label1, combo1, combo2, combo3);
         layout1.setAlignment(Pos.CENTER);
         startScene = new Scene(layout1, 700, 700);
 

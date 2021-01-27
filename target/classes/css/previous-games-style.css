@@ -41,3 +41,10 @@
     -fx-background-color: linear-gradient(#A4A29E, #CCCCCC);
     -fx-background-radius: 10;
 }
+
+.button:hover{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#A1EAD8, #cccccc);
+    -fx-background-radius: 10;
+}

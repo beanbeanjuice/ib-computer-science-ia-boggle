@@ -182,7 +182,7 @@ public class PreviousGameScreen implements ApplicationScreen {
                 boardButtons[i][j] = new Button();
 
                 // Gets the style for "button-board" from CSS.
-                boardButtons[i][j].getStyleClass().add("button-board");
+                boardButtons[i][j].setId("button-board");
 
                 boardButtons[i][j].setText(previousGame.getBoardArray()[i][j]);
                 boardButtons[i][j].setStyle("-fx-background-color: #D3D3D3");

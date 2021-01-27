@@ -96,22 +96,6 @@ public class GameScreen implements ApplicationScreen {
         leftMenu.setPadding(new Insets(20, 0, 0, 0));
 
         /////////////////
-        // Bottom Menu //
-        /////////////////
-        GridPane bottomMenu = new GridPane();
-
-        letterBuild = new TextField("");
-        letterBuild.setId("text");
-        letterBuild.setEditable(false);
-
-        bottomMenu.setPadding(new Insets(8, 8, 8, 8)); // Padding from the sides of the window.
-        bottomMenu.setVgap(8); // Vertical Gap
-        bottomMenu.setHgap(8); // Horizontal Gap
-        GridPane.setConstraints(letterBuild, 1, 0);
-        bottomMenu.getChildren().addAll(letterBuild);
-        bottomMenu.setAlignment(Pos.CENTER);
-
-        /////////////////
         // Center Menu //
         /////////////////
         boardButtons = setButtons(new Button[4][4], game.getBoard());
@@ -121,14 +105,26 @@ public class GameScreen implements ApplicationScreen {
         boardLayout.setVgap(20);
         boardLayout.setHgap(20);
 
+        ///////////////////////
+        // Middle Combo Menu //
+        ///////////////////////
+        VBox middleCombo = new VBox(20);
+
+        letterBuild = new TextField("");
+        letterBuild.setId("text");
+        letterBuild.setEditable(false);
+        letterBuild.setMaxWidth(200);
+
+        middleCombo.getChildren().addAll(boardLayout, letterBuild);
+        middleCombo.setAlignment(Pos.CENTER);
+
         BorderPane borderPane = new BorderPane();
 
         // PUTS THE PREVIOUS BOXES/PANES INTO A NEW PANE ALTOGETHER.
         borderPane.setTop(topMenu);
         borderPane.setRight(rightMenu);
-        borderPane.setCenter(boardLayout);
+        borderPane.setCenter(middleCombo);
         borderPane.setLeft(leftMenu);
-        borderPane.setBottom(bottomMenu);
         borderPane.setPadding(new Insets(20, 20, 20, 20));
         gameScreen = new Scene(borderPane, 1000, 600);
 
@@ -161,7 +157,7 @@ public class GameScreen implements ApplicationScreen {
                 boardButtons[i][j] = new Button(board[i][j]);
 
                 // Gets the style for "button-board" from CSS.
-                boardButtons[i][j].getStyleClass().add("button-board");
+                boardButtons[i][j].setId("button-board");
 
                 // This is required so that the button hitboxes are circular.
                 boardButtons[i][j].setPickOnBounds(false);
