@@ -184,9 +184,6 @@ public class GameScreen implements ApplicationScreen {
                     letterBuild.setText(game.getCharacterBuild()); // Sets the "output" to the current String build
                 });
 
-                // BUTTON LOOK CUSTOMIZATION
-                boardButtons[i][j].setFont(new Font(24));
-
                 // Sets every button to a fixed size to keep everything even.
                 boardButtons[i][j].setMaxWidth(80);
                 boardButtons[i][j].setMinWidth(80);

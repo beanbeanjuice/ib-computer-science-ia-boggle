@@ -47,5 +47,6 @@
 }
 
 .button-board{
-    -fx-background-radius: 100;
+    -fx-background-radius: 200;
+    -fx-font-size: 30;
 }
