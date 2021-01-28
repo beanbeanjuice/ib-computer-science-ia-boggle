@@ -136,6 +136,10 @@ public class GameScreen implements ApplicationScreen {
             wordsOutOfTotal.setText(game.getInputWords().size() + "/" + game.getPossibleWords().size());
             letterBuild.setText("");
             game.resetCharacterBuild(this); // Resets the characterbuilder and board after each submission.
+            if(game.getInputWords().size() == game.getPossibleWords().size()) {
+                Main.saveGame();
+                Main.setWindow(new GameEndScreen());
+            }
         });
 
         // CSS

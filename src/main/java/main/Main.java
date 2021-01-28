@@ -27,11 +27,7 @@ public class Main extends Application {
     private static final int BUTTON_WIDTH = 175;
     private static final int BUTTON_TEXT_SIZE = 18;
     private static final int TITLE_SIZE = 24;
-    private static final String TITLE_FONT = "Roboto-BoldItalic.ttf";
-    private static final String BUTTON_FONT = "Roboto-Regular.ttf";
-    private static final String TEXT_FONT = "Roboto-MediumItalic.ttf";
 
-    private static boolean allowIncorrect;
     private static boolean ignoreTimeLimit;
     private static double timeLimit;
 

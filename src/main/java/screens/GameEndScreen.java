@@ -25,11 +25,9 @@ public class GameEndScreen implements ApplicationScreen {
 
         // VBOX FOR RULES
         VBox rules = new VBox(1);
-        Label rule1 = new Label("You have run out of time...");
-        Label rule2 = new Label("The game has ended.");
-        rule1.setFont(new Font(Main.getTitleSize() - 4));
-        rule2.setFont(new Font(Main.getTitleSize() - 4));
-        rules.getChildren().addAll(rule1, rule2);
+        Label label1 = new Label("The game has ended.");
+        label1.setFont(new Font(Main.getTitleSize() - 4));
+        rules.getChildren().addAll(label1);
         rules.setAlignment(Pos.CENTER);
 
         // FULL VBOX
