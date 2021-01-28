@@ -4,7 +4,7 @@ public class BoardCharacter {
 
     private int x; // X Position
     private int y; // Y Position
-    String character; // Debugging, may not be needed.
+    String character; // Character Name
 
     public BoardCharacter(int x, int y, String character) {
         this.x = x;

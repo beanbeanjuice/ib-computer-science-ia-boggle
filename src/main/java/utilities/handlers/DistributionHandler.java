@@ -34,5 +34,4 @@ public class DistributionHandler {
     public ArrayList<String> getDistribution() {
         return distribution;
     }
-
 }

@@ -27,8 +27,18 @@ public class DictionaryHandler {
         }
     }
 
+    // NEEDED AS A BASE-CASE SINCE "Q" IS ALWAYS FOLLOWED BY A "U"
+    private boolean qLength(String word) {
+        if (word.contains("QU")) {
+            return word.length() <= 17;
+        }
+
+        return true;
+    }
+
     public void addDictionaryTree(String word) {
-        if (dictionaryTree.get(Character.toString(word.charAt(0))) == null) { // If the hashmap key does not exist for that character, create it.
+        // If the hashmap key does not exist for that character, create it.
+        if (dictionaryTree.get(Character.toString(word.charAt(0))) == null) {
             ArrayList<String> tmp = new ArrayList<>();
             tmp.add(word);
             dictionaryTree.put(Character.toString(word.charAt(0)), tmp);
@@ -50,15 +60,6 @@ public class DictionaryHandler {
             }
         }
         return false;
-    }
-
-    // NEEDED AS A BASE-CASE SINCE "Q" IS ALWAYS FOLLOWED BY A "U"
-    private boolean qLength(String word) {
-        if (word.contains("QU")) {
-            return word.length() <= 17;
-        }
-
-        return true;
     }
 
     private String getWord(String word) {

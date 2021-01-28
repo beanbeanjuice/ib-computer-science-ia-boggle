@@ -47,7 +47,6 @@ public class SettingsHandler {
             }
         } catch (SQLException e) {
             System.out.println("Error saving settings. Using default settings.");
-            // TODO: Show the user there was an error.
         }
 
         return setting;

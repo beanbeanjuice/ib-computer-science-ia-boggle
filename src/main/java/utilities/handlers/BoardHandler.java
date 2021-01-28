@@ -34,7 +34,6 @@ public class BoardHandler {
 
             letters.add(letter);
         }
-
         ArrayList<String> tmp = new ArrayList<>();
 
         // LETTERS ARE PARTIALLY RANDOMISED. THIS PLACES THE LETTERS "FULLY" RANDOMLY IN A NEW ARRAYLIST.
@@ -43,7 +42,6 @@ public class BoardHandler {
             tmp.add(letters.get(random));
             letters.remove(random); // Removes the letters from the original list.
         }
-
         count = 0; // Resets the "count" parameter to be re-used.
 
         // PLACES THE RANDOM LETTERS FROM THE NEW ARRAYLIST INTO A 2D ARRAY.

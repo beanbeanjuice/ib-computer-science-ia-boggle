@@ -169,7 +169,6 @@ public class GameScreen implements ApplicationScreen {
                         game.addCharacterBuild(letter, finalI, finalJ);
 
                         // Set colors according to rules of boggle. Sets it blue if it works, white if not.
-                        //boardButtons[finalI][finalJ].setStyle("-fx-background-color: #ADD8E6");
                         boardButtons[finalI][finalJ].setStyle("-fx-background-color: " + getColorHex(game.getStackSize()));
                     } else if (game.getHasPopped()) {
                         boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter().getY()].setStyle("-fx-background-color: "

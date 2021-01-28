@@ -38,8 +38,6 @@ public class RulesScreen implements ApplicationScreen {
         rules.getChildren().addAll(rule1, rule2, rule3, rule4, rule5);
         rules.setAlignment(Pos.CENTER);
 
-        // TODO: Implement example gifs/pictures.
-
         // FULL VBOX
         VBox layout = new VBox(20);
         layout.getChildren().addAll(label, rules, goBack);

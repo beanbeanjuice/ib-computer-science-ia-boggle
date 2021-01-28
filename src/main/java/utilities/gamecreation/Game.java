@@ -35,7 +35,6 @@ public class Game {
         possibleWords = new Search().getPossibleWords(this); // Generates the possible words and saves it.
         timer = new Timer(this);
         timer.start();
-        // TODO: timer.stop() when game ending criteria has been met.
         this.gameScreen = gameScreen;
     }
 
@@ -89,7 +88,7 @@ public class Game {
         if (!wordStarted) { // If the word has not started being built, then start it.
             wordStarted = true;
         }
-        characters.push(new BoardCharacter(x, y, string)); // Push a new character handler onto the stack.
+        characters.push(new BoardCharacter(x, y, string)); // Push a new board character onto the stack.
         spotsTaken[x][y] = true; // Make sure that spot is taken.
     }
 
@@ -101,24 +100,22 @@ public class Game {
         }
 
         if (!spotsTaken[x][y]) { // Makes sure the user can only choose boxes that are up, left, down, right, and diagonal to itself by 1 place.
-            return Math.sqrt(((x - characters.peek().getX()) * (x - characters.peek().getX())) + ((y - characters.peek().getY()) * (y - characters.peek().getY()))) < 2;
+            return Math.sqrt(((x - characters.peek().getX())
+                    * (x - characters.peek().getX()))
+                    + ((y - characters.peek().getY())
+                    * (y - characters.peek().getY()))) < 2;
         }
 
         int currentX = characters.peek().getX();
         int currentY = characters.peek().getY();
 
-        /* INFORMATION
-        Prevents the user from moving their
-        mouse around inside a single button
-        and thus allowing the same button to
-        be chosen.
-         */
+        /* Prevents the user from moving their mouse around inside a single button
+        and thus allowing the same button to be chosen. */
         if (x == currentX && y == currentY) {
             return false;
         }
 
         poppedCharacter = characters.pop();
-
         currentX = characters.peek().getX();
         currentY = characters.peek().getY();
 

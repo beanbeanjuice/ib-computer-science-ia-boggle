@@ -12,5 +12,4 @@ public interface ApplicationScreen {
     default Game getGame() {
         return null;
     }
-
 }

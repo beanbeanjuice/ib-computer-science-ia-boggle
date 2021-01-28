@@ -79,10 +79,6 @@ public class PreviousGamesScreen implements ApplicationScreen {
         wordsFound.setPrefWidth(120);
         totalWords.setPrefWidth(120);
 
-        gameID.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println(event.getTarget().toString());
-        });
-
         table.getColumns().addAll(gameID, score, timeTaken, timeAllowed, wordsFound, totalWords);
         table.setId("table-text");
 

@@ -60,7 +60,6 @@ public class GameFileHandler {
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving previous game data.");
-            // TODO: Show the user there was an error.
         }
 
         return previousGames;

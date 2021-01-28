@@ -69,18 +69,20 @@ public class Main extends Application {
         try {
             startMySQLConnection();
             System.out.println("Successfully connected to the database.");
-
             timeLimit = settingsHandler.getFromDataBase().getNum();
             int bit = settingsHandler.getFromDataBase().getBit();
-
             ignoreTimeLimit = bit != 0;
 
         } catch (SQLException e) { // This will throw an error if the database is unreachable.
             window.setScene(new MySQLConnectionErrorScreen().display());
         }
-
         window.show();
+    }
 
+    // Sets the current window. Custom interface created to house all of the screens.
+    public static void setWindow(ApplicationScreen screen) {
+        currentScreen = screen;
+        window.setScene(screen.display());
     }
 
     public static void closeProgram() {
@@ -89,10 +91,8 @@ public class Main extends Application {
             // Save everything
             if (currentScreen.getName().equals("GameScreen")) {
                 // Save Game Stuff
-
                 saveGame();
             }
-
             System.out.println("Closed Program");
             window.close();
         }
@@ -133,12 +133,6 @@ public class Main extends Application {
         return BUTTON_TEXT_SIZE;
     }
 
-    // Sets the current window. Custom interface created to house all of the screens.
-    public static void setWindow(ApplicationScreen screen) {
-        currentScreen = screen;
-        window.setScene(screen.display());
-    }
-
     // Gets which screen is currently being displayed.
     public static ApplicationScreen getCurrentScreen() {
         return currentScreen;
@@ -152,16 +146,6 @@ public class Main extends Application {
     // Sets the game time limit.
     public static void setTimeLimit(double limit) {
         timeLimit = limit;
-    }
-
-    // Gets if the game should ignore incorrect words
-    public static boolean getAllowIncorrect() {
-        return allowIncorrect;
-    }
-
-    // Sets if the game should allow incorrect words
-    public static void setAllowIncorrect(boolean answer) {
-        allowIncorrect = answer;
     }
 
     // Gets if the game should ignore the time limit
@@ -207,21 +191,6 @@ public class Main extends Application {
     // Gets the settings handler
     public static SettingsHandler getSettingsHandler() {
         return settingsHandler;
-    }
-
-    // Gets the filename for the title font
-    public static String getTitleFont() {
-        return TITLE_FONT;
-    }
-
-    // Gets the filename for the button font
-    public static String getButtonFont() {
-        return BUTTON_FONT;
-    }
-
-    // Gets the filename for the text font
-    public static String getTextFont() {
-        return TEXT_FONT;
     }
 
 }
