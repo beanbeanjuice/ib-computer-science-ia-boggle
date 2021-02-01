@@ -1,5 +1,7 @@
 package utilities.handlers;
 
+import main.Main;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +17,7 @@ public class DistributionHandler {
     }
 
     private void makeDistribution() {
-        try (Scanner scanner = new Scanner(new File("src/main/resources/distribution.csv"))) {
+        try (Scanner scanner = new Scanner(FileHandler.getResourceAsFile("distribution.csv"))) {
             while (scanner.hasNextLine()) { // Goes through every line of the distribution
                 distribution.add(getWord(scanner.nextLine())); // Adds the next line to the ArrayList
             }

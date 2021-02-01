@@ -15,7 +15,7 @@ public class DictionaryHandler {
     }
 
     private void makeDictionary() {
-        try (Scanner scanner = new Scanner(new File("src/main/resources/dictionary.csv"))) {
+        try (Scanner scanner = new Scanner(FileHandler.getResourceAsFile("dictionary.csv"))) {
             while (scanner.hasNextLine()) { // For every line in the csv file, get the word, then add it to the dictionary.
                 String word = getWord(scanner.nextLine());
                 if (word.length() >= 3 && (qLength(word) || word.length() <= 16)) {

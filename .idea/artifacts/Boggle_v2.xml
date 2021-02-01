@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Boggle v2">
+    <output-path>$PROJECT_DIR$/out/artifacts/Boggle_v2</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="main.Main" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Boggle_v2.jar">
+        <element id="module-output" name="Boggle v2" />
+        <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+        <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.22" />
+      </element>
+    </root>
+  </artifact>
+</component>
