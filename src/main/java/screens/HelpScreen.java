@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import main.Main;
+import utilities.handlers.FileHandler;
 import utilities.screens.ApplicationScreen;
 
 import java.io.File;
@@ -22,13 +23,9 @@ public class HelpScreen implements ApplicationScreen {
 
     @Override
     public Scene display() {
-        // GIF Image to be used for graphical help
-        Image image = new Image(new File("src/main/resources/HelpScreen/gamehelp.gif").toURI().toString());
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
 
         // Video to be used for graphical help
-        Media media = new Media(new File("src/main/resources/HelpScreen/gamehelp.mp4").toURI().toString());
+        Media media = new Media(FileHandler.getResourceAsFile("HelpScreen/gamehelp.mp4").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView();
         mediaView.setMediaPlayer(mediaPlayer);
