@@ -12,13 +12,19 @@ public class GameFileHandler {
 
         Connection connection = Main.getSQLServer().getConnection();
 
-        // MySQL Syntax for retrieving data.
+        // MySQL Syntax for inserting data into a table.
+        // The "?" represents variables to be input using the statement.set() method.
+        // "?" is MySQL Syntax.
         String arguments = "INSERT INTO GameData " +
-                "(GameID, Score, BoardCharacters, TimeTaken, TimeAllowed, WordsFound, TotalWords, FoundWordsStringList, TotalWordsStringList) " +
+                "(GameID, Score, BoardCharacters, TimeTaken, TimeAllowed, " +
+                "WordsFound, TotalWords, FoundWordsStringList, TotalWordsStringList) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
+            // Prepares a statement to be executed on the connection from the SQLServer object.
             PreparedStatement statement = connection.prepareStatement(arguments);
+
+            // ParameterIndex is the column number on the actual MySQL database.
             statement.setInt(1, previousGame.getGameID());
             statement.setInt(2, previousGame.getScore());
             statement.setString(3, previousGame.getBoard());
@@ -29,6 +35,7 @@ public class GameFileHandler {
             statement.setString(8, previousGame.getFoundWordsStringList());
             statement.setString(9, previousGame.getTotalWordsStringList());
 
+            // Executes the statement
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -42,10 +49,17 @@ public class GameFileHandler {
         String arguments = "SELECT * FROM GameData";
 
         try {
+            /*
+            Since we are retrieving the data now, we no longer
+            want to "prepare" the data. This is why we use
+            Statement instead of PreparedStatement to get
+            the results immediately.
+             */
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(arguments);
 
             while (resultSet.next()) {
+                // ColumnIndex coincides with the column number on the database.
                 int gameID = resultSet.getInt(1);
                 int score = resultSet.getInt(2);
                 String board = resultSet.getString(3);
@@ -56,7 +70,10 @@ public class GameFileHandler {
                 String wordsFoundStringList = resultSet.getString(8);
                 String totalWordsStringList = resultSet.getString(9);
 
-                previousGames.add(new PreviousGame(gameID, board, score, timeTaken, totalTime, wordsFound, totalWords, wordsFoundStringList, totalWordsStringList));
+                // This creates a new "PreviousGame" object for each row on the database.
+                previousGames.add(new PreviousGame(gameID, board, score, timeTaken,
+                        totalTime, wordsFound, totalWords,
+                        wordsFoundStringList, totalWordsStringList));
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving previous game data.");
@@ -65,6 +82,8 @@ public class GameFileHandler {
         return previousGames;
     }
 
+    // Retrieves a specific previous game.
+    // Used when double clicking a row in the PreviousGames screen.
     public PreviousGame getPreviousGame(int gameID) {
         for (PreviousGame previousGame : getFromDataBase()) {
             if (previousGame.getGameID() == gameID) {
