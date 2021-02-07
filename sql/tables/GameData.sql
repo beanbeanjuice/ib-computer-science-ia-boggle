@@ -5,4 +5,6 @@ BoardCharacters NVARCHAR(100),
 TimeTaken INT,
 TimeAllowed INT,
 WordsFound INT,
-TotalWords INT);
+TotalWords INT,
+FoundWordsStringList TEXT,
+TotalWordsStringList TEXT);

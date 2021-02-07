@@ -39,7 +39,7 @@ public class SettingsHandler {
             ResultSet resultSet = statement.executeQuery(arguments);
 
             while (resultSet.next()) {
-                int num = resultSet.getInt(2);
+                double num = resultSet.getDouble(2);
                 int bit = resultSet.getInt(3);
 
                 setting.setNum(num);
