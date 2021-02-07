@@ -1,11 +1,9 @@
 package utilities.handlers.sql;
 
 import main.Main;
-import utilities.gamecreation.PreviousGame;
 import utilities.handlers.Setting;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SettingsHandler {
 
