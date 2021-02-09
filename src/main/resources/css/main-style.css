@@ -55,6 +55,11 @@
     -fx-min-height: 80;
 }
 
+#error-label{
+    -fx-text-fill: red;
+    -fx-font-size: 15;
+}
+
 .button:hover{
     -fx-font-size: 18;
     -fx-font-weight: bold;

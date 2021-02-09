@@ -17,7 +17,6 @@ public class PreviousGamesScreen implements ApplicationScreen {
 
     private Scene previousGamesScreen;
     private ArrayList<PreviousGame> previousGames;
-    public String name = "PreviousGamesScreen";
     private TableView<PreviousGame> table = new TableView<>();
 
     @Override

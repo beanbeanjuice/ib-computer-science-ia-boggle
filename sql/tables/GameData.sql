@@ -1,7 +1,8 @@
 CREATE TABLE GameData
-(GameID INT,
+(Username TEXT,
+GameID INT,
 Score INT,
-BoardCharacters NVARCHAR(100),
+BoardCharacters NVARCHAR(17),
 TimeTaken INT,
 TimeAllowed INT,
 WordsFound INT,

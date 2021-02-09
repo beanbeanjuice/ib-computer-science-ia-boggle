@@ -16,24 +16,25 @@ public class GameFileHandler {
         // The "?" represents variables to be input using the statement.set() method.
         // "?" is MySQL Syntax.
         String arguments = "INSERT INTO GameData " +
-                "(GameID, Score, BoardCharacters, TimeTaken, TimeAllowed, " +
+                "(Username, GameID, Score, BoardCharacters, TimeTaken, TimeAllowed, " +
                 "WordsFound, TotalWords, FoundWordsStringList, TotalWordsStringList) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             // Prepares a statement to be executed on the connection from the SQLServer object.
             PreparedStatement statement = connection.prepareStatement(arguments);
 
             // ParameterIndex is the column number on the actual MySQL database.
-            statement.setInt(1, previousGame.getGameID());
-            statement.setInt(2, previousGame.getScore());
-            statement.setString(3, previousGame.getBoard());
-            statement.setDouble(4, previousGame.getTimeTaken());
-            statement.setDouble(5, previousGame.getTotalTime());
-            statement.setInt(6, previousGame.getWordsFound());
-            statement.setInt(7, previousGame.getTotalWords());
-            statement.setString(8, previousGame.getFoundWordsStringList());
-            statement.setString(9, previousGame.getTotalWordsStringList());
+            statement.setString(1, Main.getUsername().toLowerCase());
+            statement.setInt(2, previousGame.getGameID());
+            statement.setInt(3, previousGame.getScore());
+            statement.setString(4, previousGame.getBoard());
+            statement.setDouble(5, previousGame.getTimeTaken());
+            statement.setDouble(6, previousGame.getTotalTime());
+            statement.setInt(7, previousGame.getWordsFound());
+            statement.setInt(8, previousGame.getTotalWords());
+            statement.setString(9, previousGame.getFoundWordsStringList());
+            statement.setString(10, previousGame.getTotalWordsStringList());
 
             // Executes the statement
             statement.execute();
@@ -46,7 +47,7 @@ public class GameFileHandler {
     public ArrayList<PreviousGame> getFromDataBase() {
         ArrayList<PreviousGame> previousGames = new ArrayList<>();
         Connection connection = Main.getSQLServer().getConnection();
-        String arguments = "SELECT * FROM GameData";
+        String arguments = "SELECT * FROM GameData WHERE Username = '" + Main.getUsername().toLowerCase() + "';";
 
         try {
             /*
@@ -60,15 +61,15 @@ public class GameFileHandler {
 
             while (resultSet.next()) {
                 // ColumnIndex coincides with the column number on the database.
-                int gameID = resultSet.getInt(1);
-                int score = resultSet.getInt(2);
-                String board = resultSet.getString(3);
-                double timeTaken = resultSet.getDouble(4);
-                double totalTime = resultSet.getDouble(5);
-                int wordsFound = resultSet.getInt(6);
-                int totalWords = resultSet.getInt(7);
-                String wordsFoundStringList = resultSet.getString(8);
-                String totalWordsStringList = resultSet.getString(9);
+                int gameID = resultSet.getInt(2);
+                int score = resultSet.getInt(3);
+                String board = resultSet.getString(4);
+                double timeTaken = resultSet.getDouble(5);
+                double totalTime = resultSet.getDouble(6);
+                int wordsFound = resultSet.getInt(7);
+                int totalWords = resultSet.getInt(8);
+                String wordsFoundStringList = resultSet.getString(9);
+                String totalWordsStringList = resultSet.getString(10);
 
                 // This creates a new "PreviousGame" object for each row on the database.
                 previousGames.add(new PreviousGame(gameID, board, score, timeTaken,

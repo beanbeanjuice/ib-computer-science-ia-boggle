@@ -1,4 +1,4 @@
 CREATE TABLE Settings
-(ID INT,
+(Username TEXT,
 TimeLimit FLOAT,
 IgnoreTimeLimit INT);

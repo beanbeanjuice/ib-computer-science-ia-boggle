@@ -15,7 +15,9 @@ public class SettingsHandler {
         Connection connection = Main.getSQLServer().getConnection();
 
         // MySQL Syntax for updating data.
-        String arguments = "UPDATE Settings SET TimeLimit = " + num + ", IgnoreTimeLimit = " + bit + " WHERE ID = 1;";
+        String arguments = "UPDATE Settings SET TimeLimit = " + num +
+                ", IgnoreTimeLimit = " + bit + " WHERE Username = '"
+                + Main.getUsername() + "';";
 
         try {
             PreparedStatement statement = connection.prepareStatement(arguments);
@@ -27,10 +29,31 @@ public class SettingsHandler {
         }
     }
 
-    public Setting getFromDataBase() {
+    public boolean createSettings(String username) {
+        Connection connection = Main.getSQLServer().getConnection();
+
+        // MD5 is used to insert into the database as an MD5 hash
+        String arguments = "INSERT INTO Settings " +
+                "(Username, TimeLimit, IgnoreTimeLimit) " +
+                "VALUES (?, ?, ?)";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(arguments);
+            statement.setString(1, username.toLowerCase());
+            statement.setDouble(2, 5);
+            statement.setInt(3, 0);
+            statement.execute();
+            return true;
+
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public Setting getFromDataBase(String username) {
         Setting setting = new Setting(5, 0);
         Connection connection = Main.getSQLServer().getConnection();
-        String arguments = "SELECT * FROM Settings";
+        String arguments = "SELECT * FROM Settings WHERE Username = '" + username + "';";
 
         try {
             Statement statement = connection.createStatement();
