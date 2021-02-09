@@ -10,7 +10,7 @@ public class LoginHandler {
 
         Connection connection = Main.getSQLServer().getConnection();
 
-        // SHA2 (SHA256) is used to insert into the database as a SHA256 hash
+        // SHA2 (SHA512) is used to insert into the database as a SHA512 hash
         String arguments = "INSERT INTO UserData VALUES(?, SHA2(?, 512));";
 
         if (checkDatabase(username, password).equals(LOGIN_INFORMATION.NO_USER)) {
@@ -64,10 +64,10 @@ public class LoginHandler {
                 return LOGIN_INFORMATION.NO_USER;
             }
 
-            // Converts the password the user entered into a SHA256 string hex
+            // Converts the password the user entered into a SHA512 string hex
             String digestedPassword = DigestUtils.sha512Hex(password);
 
-            // If the SHA256 Hash is the same as in the database, allow a login
+            // If the SHA512 Hash is the same as in the database, allow a login
             if (resultSet.getString(2).equals(digestedPassword)) {
                 return LOGIN_INFORMATION.SUCCESSFUL_LOGIN;
             } else {

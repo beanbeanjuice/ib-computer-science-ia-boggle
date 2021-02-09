@@ -98,17 +98,6 @@ public class LoginScreen implements ApplicationScreen {
             }
         });
 
-        // TODO: Delete later
-        // CURRENTLY NOT WORKING DUE TO BUG IN JAVAFX CODE
-//        usernameField.setOnKeyTyped(keyEvent -> {
-//            if (Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK)) {
-//                errorLabel.setVisible(true);
-//                errorLabel.setText("WARNING: Caps lock is enabled!");
-//            } else if (!Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK)) {
-//                errorLabel.setVisible(false);
-//            }
-//        });
-
         // CSS
         loginScreen.getStylesheets().add("css/main-style.css");
 
