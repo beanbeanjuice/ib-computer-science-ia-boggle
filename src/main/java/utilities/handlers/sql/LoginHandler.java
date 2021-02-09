@@ -10,8 +10,8 @@ public class LoginHandler {
 
         Connection connection = Main.getSQLServer().getConnection();
 
-        // MD5 is used to insert into the database as an MD5 hash
-        String arguments = "INSERT INTO UserData VALUES(?, md5(?));";
+        // SHA2 (SHA256) is used to insert into the database as a SHA256 hash
+        String arguments = "INSERT INTO UserData VALUES(?, SHA2(?, 512));";
 
         if (checkDatabase(username, password).equals(LOGIN_INFORMATION.NO_USER)) {
             try {
@@ -33,6 +33,22 @@ public class LoginHandler {
         }
     }
 
+    public boolean updatePassword(String password) {
+        Connection connection = Main.getSQLServer().getConnection();
+
+        String arguments = "UPDATE UserData SET Password = SHA2('" + password + "', 512) WHERE Username = '" +
+                Main.getUsername() + "';";
+
+        try {
+            Statement statement = connection.createStatement();
+
+            statement.executeUpdate(arguments);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
     public LOGIN_INFORMATION checkDatabase(String username, String password) {
         username = username.toLowerCase();
         Connection connection = Main.getSQLServer().getConnection();
@@ -48,10 +64,10 @@ public class LoginHandler {
                 return LOGIN_INFORMATION.NO_USER;
             }
 
-            // Converts the password the user entered into an MD5 string hex
-            String digestedPassword = DigestUtils.md5Hex(password);
+            // Converts the password the user entered into a SHA256 string hex
+            String digestedPassword = DigestUtils.sha512Hex(password);
 
-            // If the MD5 Hash is the same as in the database, allow a login
+            // If the SHA256 Hash is the same as in the database, allow a login
             if (resultSet.getString(2).equals(digestedPassword)) {
                 return LOGIN_INFORMATION.SUCCESSFUL_LOGIN;
             } else {
@@ -60,7 +76,6 @@ public class LoginHandler {
 
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             return LOGIN_INFORMATION.CONNECTION_ERROR;
         }
     }

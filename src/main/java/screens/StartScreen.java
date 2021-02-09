@@ -53,17 +53,23 @@ public class StartScreen implements ApplicationScreen {
         helpButton.setMaxWidth(buttonWidth);
         helpButton.setMinWidth(buttonWidth);
 
+        // LOGOUT BUTTON
+        Button logoutButton = new Button("Logout");
+        logoutButton.setOnAction(e -> Main.setWindow(new LoginScreen()));
+        logoutButton.setMaxWidth(buttonWidth);
+        logoutButton.setMinWidth(buttonWidth);
+
         // CLOSE BUTTON
         Button closeButton = new Button("Save and Quit");
         closeButton.setOnAction(e -> Main.closeProgram());
         closeButton.setMaxWidth(buttonWidth);
         closeButton.setMinWidth(buttonWidth);
 
-        // LOGOUT BUTTON
-        Button logoutButton = new Button("Logout");
-        logoutButton.setOnAction(e -> Main.setWindow(new LoginScreen()));
-        logoutButton.setMaxWidth(buttonWidth);
-        logoutButton.setMinWidth(buttonWidth);
+        // Change Password Button
+        Button changePasswordButton = new Button("Change Password");
+        changePasswordButton.setOnAction(e -> Main.setWindow(new ChangePasswordScreen()));
+        changePasswordButton.setMaxWidth(buttonWidth);
+        changePasswordButton.setMinWidth(buttonWidth);
 
         // COMBINATION OF START AND PREVIOUS GAMES
         HBox combo1 = new HBox(5);
@@ -80,9 +86,14 @@ public class StartScreen implements ApplicationScreen {
         combo3.getChildren().addAll(settingsButton, logoutButton);
         combo3.setAlignment(Pos.CENTER);
 
+        // COMBINATION OF CHANGE PASSWORD AND QUIT
+        HBox combo4 = new HBox(5);
+        combo4.getChildren().addAll(changePasswordButton, closeButton);
+        combo4.setAlignment(Pos.CENTER);
+
         // Layout 1 - children are laid out in a vertical column
         VBox layout1 = new VBox(10);
-        layout1.getChildren().addAll(label1, combo1, combo2, combo3, closeButton);
+        layout1.getChildren().addAll(label1, combo1, combo2, combo3, combo4);
         layout1.setAlignment(Pos.CENTER);
         startScene = new Scene(layout1, 700, 700);
 

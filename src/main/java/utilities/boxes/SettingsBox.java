@@ -33,9 +33,9 @@ public class SettingsBox {
         Label time = new Label("Time (in Minutes):");
         time.setId("text");
 
-        Label timeInfo = new Label("1 minute or above. 10 minutes or less.");
-        timeInfo.setId("text-no-bold");
-        timeInfo.setFont(new Font(10));
+        Label errorLabel = new Label();
+        errorLabel.setId("error-label");
+        errorLabel.setVisible(false);
 
         ComboBox<String> timeInput = new ComboBox<>();
         timeInput.getItems().addAll(
@@ -78,14 +78,21 @@ public class SettingsBox {
                     Main.setIgnoreTimeLimit(isSelected);
                     Main.getSettingsHandler().updateSettings(new Setting(num, bit));
                     window.close();
+                } else {
+                    errorLabel.setText("Time must be between 1 and 10 minutes.");
+                    errorLabel.setVisible(true);
                 }
+            } else {
+                errorLabel.setText("Time input must be numbers only.");
+                errorLabel.setVisible(true);
             }
         });
 
         VBox layout = new VBox(10);
-        layout.getChildren().addAll(time, timeInfo, timeInput, ignoreTimeLimit, saveButton);
+        layout.getChildren().addAll(time, errorLabel, timeInput, ignoreTimeLimit, saveButton);
         layout.setAlignment(Pos.CENTER); // Centers everything
         layout.setPadding(new Insets(10, 10, 10, 10));
+        layout.setMinWidth(300);
 
         Scene scene = new Scene(layout);
 
