@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
+import utilities.gamecreation.PreviousGame;
 import utilities.screens.ApplicationScreen;
 
 public class GameEndScreen implements ApplicationScreen {
@@ -25,7 +26,14 @@ public class GameEndScreen implements ApplicationScreen {
 
         // VBOX FOR RULES
         VBox rules = new VBox(1);
-        Label label1 = new Label("The game has ended.");
+        PreviousGame previousGame = Main.getGameFileHandler().getPreviousGame(Main.getGameFileHandler().getFromDataBase().size());
+
+        // Message to put into the game ending screen.
+        String message = ("You found " + previousGame.getWordsFound() + "/" +
+                previousGame.getTotalWords() + " words and received "
+                + previousGame.getScore() + " points!");
+
+        Label label1 = new Label(message);
         label1.setFont(new Font(Main.getTitleSize() - 4));
         rules.getChildren().addAll(label1);
         rules.setAlignment(Pos.CENTER);

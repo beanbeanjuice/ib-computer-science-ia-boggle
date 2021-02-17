@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Search {
 
-    private ArrayList<String> possibleWords;
+    private final ArrayList<String> possibleWords;
 
     public Search() {
         possibleWords = new ArrayList<>();

@@ -5,10 +5,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import main.Main;
 import utilities.screens.ApplicationScreen;
-
-import java.sql.SQLException;
 
 public class MySQLConnectionErrorScreen implements ApplicationScreen {
 
@@ -17,21 +16,21 @@ public class MySQLConnectionErrorScreen implements ApplicationScreen {
     @Override
     public Scene display() {
 
-        Button retry = new Button("Retry Database Connection");
+        Button retry = new Button("Retry Connection");
 
         retry.setOnAction(e -> {
-            try {
-                Main.startMySQLConnection();
-                Main.setWindow(new StartScreen());
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            Main.setWindow(new StartupConnectionScreen());
+            Main.startMySQLConnection();
         });
 
-        javafx.scene.control.Label label = new Label("Database ERROR");
+        Label label = new Label("Database ERROR");
         label.setId("title");
+
+        Label info = new Label("Please check your internet connection...");
+        info.setFont(new Font(Main.getTitleSize() - 4));
+
         VBox layout = new VBox(20);
-        layout.getChildren().addAll(label, retry);
+        layout.getChildren().addAll(label, info, retry);
         layout.setAlignment(Pos.CENTER);
 
         mySQLConnectionErrorScreen = new Scene(layout, 1000, 600);

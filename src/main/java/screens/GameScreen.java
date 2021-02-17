@@ -18,7 +18,7 @@ import utilities.screens.ApplicationScreen;
 
 public class GameScreen implements ApplicationScreen {
 
-    private Game game;
+    private Game game; // The game screen will contain a game object
     private Scene gameScreen;
     static TextField letterBuild;
     static TextField scoreAmount;
@@ -36,14 +36,14 @@ public class GameScreen implements ApplicationScreen {
         // THE "SCORE" PORTION OF THE TOP MENU
         VBox score = new VBox(5); // Creates a new horizontal box
         Label scoreLabel = new Label("Score"); // Creates a new label with the text "score" shown on it.
-        scoreLabel.setId("text");
+        scoreLabel.setId("text"); // CSS ID for setting this specific CSS
         scoreAmount = new TextField(""); // Creates a new empty text field.
         scoreAmount.setEditable(false); // Makes the text field not editable.
-        scoreAmount.setId("game-box");
+        scoreAmount.setId("game-box"); // CSS ID for setting this specific CSS
         scoreAmount.setMaxWidth(100); // Makes the maximum width of the text field 100 pixels.
         score.getChildren().addAll(scoreLabel, scoreAmount); // Adds the label and text field to the score HBox.
         score.setAlignment(Pos.CENTER); // Centers the HBox.
-        score.setPadding(new Insets(0, 0, 0, 40));
+        score.setPadding(new Insets(0, 0, 0, 40)); // Padding around the border
 
         // THE "TIME" PORTION OF THE TOP MENU
         VBox timeLeft = new VBox(5);
@@ -51,7 +51,7 @@ public class GameScreen implements ApplicationScreen {
         timeLabel.setId("text");
         timeLabel.setFont(new Font(20));
         timeAmount = new TextField("");
-        timeAmount.setEditable(false);
+        timeAmount.setEditable(false); // Makes it so it can't be edited.
         timeAmount.setId("game-box");
         timeAmount.setMaxWidth(100);
         timeLeft.getChildren().addAll(timeLabel, timeAmount);
@@ -175,7 +175,8 @@ public class GameScreen implements ApplicationScreen {
                         // Set colors according to rules of boggle. Sets it blue if it works, white if not.
                         boardButtons[finalI][finalJ].setStyle("-fx-background-color: " + getColorHex(game.getStackSize()));
                     } else if (game.getHasPopped()) {
-                        boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter().getY()].setStyle("-fx-background-color: "
+                        boardButtons[game.getPoppedCharacter().getX()][game.getPoppedCharacter()
+                                .getY()].setStyle("-fx-background-color: "
                                 + getColorHex(0));
                         game.setHasPopped(false);
                     }
@@ -237,6 +238,8 @@ public class GameScreen implements ApplicationScreen {
         return game;
     }
 
+    // Color hexes to change.
+    // Allows this to possibly be different for different themes in the future.
     public String getColorHex(int amount) {
         switch (amount) {
             case 1: return "#bdf1ff";

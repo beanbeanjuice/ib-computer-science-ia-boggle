@@ -4,8 +4,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import screens.LoginScreen;
 import screens.MySQLConnectionErrorScreen;
-import screens.StartScreen;
-import sun.rmi.runtime.Log;
+import screens.StartupConnectionScreen;
 import utilities.boxes.ConfirmationBox;
 import utilities.gamecreation.Game;
 import utilities.gamecreation.PreviousGame;
@@ -48,6 +47,7 @@ public class Main extends Application {
     private static LoginHandler loginHandler;
 
     public static void main(String[] args) {
+        // Instantiating all objects that are needed for the game to run
         dictionaryHandler = new DictionaryHandler();
         distributionHandler = new DistributionHandler();
         boardHandler = new BoardHandler(distributionHandler);
@@ -58,25 +58,23 @@ public class Main extends Application {
         launch(args);
     }
 
+    // Code that is run to start the GUI.
     @Override
     public void start(Stage primaryStage) {
 
         window = primaryStage;
-        setWindow(new LoginScreen());
+        window.setTitle("Boggle: The Game");
+        setWindow(new StartupConnectionScreen());
+        window.show();
+
+        // Consumes the "X" button or Mac/Linux equivalent.
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
         });
 
-        System.out.println("Attempting Connection to the Database...");
-        try {
-            startMySQLConnection();
-            System.out.println("Successfully connected to the database.");
-
-        } catch (SQLException e) { // This will throw an error if the database is unreachable.
-            window.setScene(new MySQLConnectionErrorScreen().display());
-        }
-        window.show();
+        // Starts the MySQL Exception
+        startMySQLConnection();
     }
 
     // Sets the current window. Custom interface created to house all of the screens.
@@ -98,24 +96,25 @@ public class Main extends Application {
         }
     }
 
+    // Saves all aspects of the current game.
     public static void saveGame() {
         Game game = currentScreen.getGame();
         PreviousGame previousGame = game.save();
         boolean successfulSave = gameFileHandler.addToDatabase(previousGame);
         while (!successfulSave) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(500); // Needed so the computer doesn't freeze
                 successfulSave = gameFileHandler.addToDatabase(currentScreen.getGame().save());
             } catch (InterruptedException ignored) {}
         }
-        game.getTimer().stop();
+        game.getTimer().stop(); // Stops the timer if it is active.
     }
 
     /* ===========================================================================
     MYSQL CONNECTION
     =========================================================================== */
 
-    public static void startMySQLConnection() throws SQLException {
+    public static void startMySQLConnection() {
         sqlServer = new SQLServer(SQL_URL, SQL_PORT, SQL_USERNAME, SQL_PASSWORD);
     }
 

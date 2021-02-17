@@ -13,11 +13,9 @@ import utilities.handlers.Setting;
 public class SettingsBox {
 
     private String title;
-    private String message;
 
-    public SettingsBox(String title, String message) {
+    public SettingsBox(String title) {
         this.title = title;
-        this.message = message;
     }
 
     public void display() {
@@ -38,6 +36,10 @@ public class SettingsBox {
 
         ComboBox<String> timeInput = new ComboBox<>();
         timeInput.getItems().addAll(
+                "10.0",
+                "9.0",
+                "8.0",
+                "7.0",
                 "6.0",
                 "5.0",
                 "4.0",
@@ -48,7 +50,6 @@ public class SettingsBox {
         timeInput.setEditable(true);
         timeInput.setId("text-no-bold");
         timeInput.getSelectionModel().select(Double.toString(Main.getTimeLimit()));
-
 
         // Allow for Input after Time Ends
         CheckBox ignoreTimeLimit = new CheckBox("Ignore Time Limit");

@@ -88,10 +88,9 @@ public class LoginScreen implements ApplicationScreen {
             }
         });
 
-
-
         loginScreen = new Scene(layout, 1000, 600);
 
+        // Checks if the ENTER key is pressed
         loginScreen.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
                 login(usernameField, passwordField, errorLabel);

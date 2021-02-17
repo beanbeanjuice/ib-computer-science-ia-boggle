@@ -1,6 +1,5 @@
 package utilities.gamecreation;
 
-import javafx.stage.Screen;
 import main.Main;
 import screens.GameScreen;
 import utilities.handlers.BoardCharacter;
@@ -23,8 +22,8 @@ public class Game {
     private boolean wordStarted; // Checks if a word is "being created"
     private Stack<BoardCharacter> characters; // A stack of the "CharacterHandler" class.
     private boolean hasPopped = false;
-    private Timer timer;
-    private GameScreen gameScreen;
+    private final Timer timer;
+    private final GameScreen gameScreen;
     private BoardCharacter poppedCharacter;
 
     public Game(GameScreen gameScreen) {

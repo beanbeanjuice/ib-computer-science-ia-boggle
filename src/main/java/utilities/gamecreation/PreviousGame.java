@@ -13,10 +13,10 @@ public class PreviousGame {
     private final double totalTime;
     private final int wordsFound;
     private final int totalWords;
-    private ArrayList<String> wordsFoundArrayList = new ArrayList<>();
-    private ArrayList<String> totalWordsArrayList = new ArrayList<>();
-    private String wordsFoundStringList = "";
-    private String totalWordsStringList = "";
+    private final ArrayList<String> wordsFoundArrayList;
+    private final ArrayList<String> totalWordsArrayList;
+    private final String wordsFoundStringList;
+    private final String totalWordsStringList;
 
     // Creating a previous game from app
     public PreviousGame(int gameID, String[][] board, int score,
