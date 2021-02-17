@@ -17,7 +17,6 @@ public class StartScreen implements ApplicationScreen {
     @Override
     public Scene display() {
         int buttonWidth = Main.getButtonWidth();
-        int buttonTextSize = Main.getButtonTextSize();
         // TITLE
         Label label1 = new Label("Boggle: The Game");
         //label1.setFont(fontHandler.getFont(Main.getTitleFont(), 50));
@@ -43,7 +42,7 @@ public class StartScreen implements ApplicationScreen {
 
         // SETTINGS
         Button settingsButton = new Button("Settings");
-        settingsButton.setOnAction(e -> new SettingsBox("Settings", "Boggle Settings").display());
+        settingsButton.setOnAction(e -> new SettingsBox("Settings").display());
         settingsButton.setMaxWidth(buttonWidth);
         settingsButton.setMinWidth(buttonWidth);
 

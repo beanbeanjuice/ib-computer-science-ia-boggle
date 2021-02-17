@@ -68,8 +68,6 @@ public class ChangePasswordScreen implements ApplicationScreen {
         layout.getChildren().addAll(title, comboHBOX, errorLabel, buttonHBOX);
         layout.setAlignment(Pos.CENTER);
         layout.setPadding(new Insets(10, 80, 10, 80));
-        // Put the GridPane in a ScrollPane
-        // Put the ScrollPane in a VBox
 
         changePasswordButton.setOnAction(e -> {
             if (checkFields(passwordField, passwordConfirmField)) {

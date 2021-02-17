@@ -1,13 +1,10 @@
 package utilities.handlers;
 
-import main.Main;
-
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BoardHandler {
 
-    private String[][] board;
     private DistributionHandler distributionHandler;
 
     public BoardHandler(DistributionHandler distributionHandler) {
@@ -50,10 +47,6 @@ public class BoardHandler {
                 board[i][j] = tmp.get(count++);
             }
         }
-        return board;
-    }
-
-    public String[][] getBoard() {
         return board;
     }
 

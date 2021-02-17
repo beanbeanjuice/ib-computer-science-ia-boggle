@@ -16,12 +16,10 @@ import main.Main;
 import utilities.gamecreation.PreviousGame;
 import utilities.screens.ApplicationScreen;
 
-import java.util.ArrayList;
-
 public class PreviousGameScreen implements ApplicationScreen {
 
     private Scene previousGameScreen;
-    private int gameID;
+    private final int gameID;
     private PreviousGame previousGame;
 
     public PreviousGameScreen(int gameID) {
@@ -83,7 +81,7 @@ public class PreviousGameScreen implements ApplicationScreen {
         Button backButton = new Button("Back");
         backButton.setOnAction(e -> {
             Main.setWindow(new PreviousGamesScreen());
-        }); // Lambda Statement to run the code within to display the startscreen if the reset button is clicked.
+        }); // Lambda Statement to run the code within to display the StartScreen if the reset button is clicked.
         backButton.setAlignment(Pos.CENTER);
         rightMenu.getChildren().add(backButton);
         rightMenu.setAlignment(Pos.CENTER);
@@ -141,7 +139,7 @@ public class PreviousGameScreen implements ApplicationScreen {
         /////////////////
         // Center Menu //
         /////////////////
-        Button[][] boardButtons = setButtons(new Button[4][4], previousGame.getBoard());
+        Button[][] boardButtons = setButtons(new Button[4][4]);
         GridPane boardLayout = createGridPane(new GridPane(), boardButtons);
         boardLayout.setAlignment(Pos.CENTER);
         boardLayout.setVgap(20);
@@ -172,9 +170,7 @@ public class PreviousGameScreen implements ApplicationScreen {
         return "PreviousGameScreen";
     }
 
-    private Button[][] setButtons(Button[][] boardButtons, String board) {
-
-        int pos = 0;
+    private Button[][] setButtons(Button[][] boardButtons) {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {

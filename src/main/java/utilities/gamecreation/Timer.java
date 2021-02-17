@@ -3,7 +3,6 @@ package utilities.gamecreation;
 import javafx.application.Platform;
 import main.Main;
 import screens.GameEndScreen;
-import screens.StartScreen;
 import utilities.boxes.ConfirmationBox;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,8 +11,7 @@ public class Timer implements Runnable {
 
     private final long startTime;
     private final AtomicBoolean running = new AtomicBoolean(false);
-    private Thread thread;
-    private Game game;
+    private final Game game;
     private int timeElapsed = 0;
 
     public Timer(Game game) {
@@ -23,7 +21,7 @@ public class Timer implements Runnable {
     }
 
     public void start() {
-        thread = new Thread(this);
+        Thread thread = new Thread(this);
         thread.start();
     }
 

@@ -16,7 +16,7 @@ public class PreviousGamesScreen implements ApplicationScreen {
 
     private Scene previousGamesScreen;
     private ArrayList<PreviousGame> previousGames;
-    private TableView<PreviousGame> table = new TableView<>();
+    private final TableView<PreviousGame> table = new TableView<>();
 
     @Override
     public Scene display() {
@@ -48,6 +48,7 @@ public class PreviousGamesScreen implements ApplicationScreen {
         TableColumn wordsFound = new TableColumn("Words Found");
         TableColumn totalWords = new TableColumn("Total Words");
 
+        // Reads the variable name from the PreviousGame object.
         gameID.setCellValueFactory(new PropertyValueFactory<>("gameID"));
         score.setCellValueFactory(new PropertyValueFactory<>("score"));
         timeTaken.setCellValueFactory(new PropertyValueFactory<>("timeTaken"));
