@@ -45,9 +45,7 @@ public class SQLServer implements Runnable {
     @Override
     public void run() {
         running.set(true);
-        System.out.println("connecting");
         while (running.get()) {
-            System.out.println("connecting2");
 
             try {
                 connection = DriverManager.getConnection(url, username, password);
