@@ -85,10 +85,7 @@ public class ChangePasswordScreen implements ApplicationScreen {
             if (!loginInformation.equals(LoginHandler.LOGIN_INFORMATION.SUCCESSFUL_LOGIN)) {
                 errorLabel.setVisible(true);
                 errorLabel.setText(loginInformation.getMessage());
-                return;
-            }
-
-            if (checkFields(passwordField, passwordConfirmField)) {
+            } else if (checkFields(passwordField, passwordConfirmField)) {
                 if (passwordField.getText().length() < 8) {
                     errorLabel.setVisible(true);
                     errorLabel.setText("Password must be 8 more more characters.");

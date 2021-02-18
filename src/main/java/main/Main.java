@@ -2,8 +2,6 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import screens.LoginScreen;
-import screens.MySQLConnectionErrorScreen;
 import screens.StartupConnectionScreen;
 import utilities.boxes.ConfirmationBox;
 import utilities.gamecreation.Game;
@@ -17,9 +15,15 @@ import utilities.handlers.sql.SettingsHandler;
 import utilities.screens.ApplicationScreen;
 import utilities.sql.SQLServer;
 
-import java.sql.SQLException;
-
 public class Main extends Application {
+
+    /*
+    ATTENTION ATTENTION
+    IF YOU ARE TRYING TO RUN THIS FILE ON YOUR OWN COMPUTER,
+    SET SDK TO JAVA 1.8 (version 1.8.0_251) AND
+    PROJECT LANGUAGE LEVEL TO LEVEL 8
+    JAVAFX IS NOT INCLUDED IN HIGHER LANGUAGE LEVELS
+     */
 
     private static ApplicationScreen currentScreen;
     private static Stage window;
