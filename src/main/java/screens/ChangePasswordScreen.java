@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.Main;
+import utilities.handlers.sql.LoginHandler;
 import utilities.screens.ApplicationScreen;
 
 public class ChangePasswordScreen implements ApplicationScreen {
@@ -29,6 +30,12 @@ public class ChangePasswordScreen implements ApplicationScreen {
         cancelButton.setOnAction(e -> {
             Main.setWindow(new StartScreen());
         });
+
+        Label currentPasswordLabel = new Label("Current Password");
+        PasswordField currentPasswordField = new PasswordField();
+        currentPasswordField.setPromptText("current password");
+        currentPasswordField.setEditable(true);
+        currentPasswordLabel.setId("text");
 
         Label passwordLabel = new Label("Password");
         PasswordField passwordField = new PasswordField();
@@ -56,8 +63,8 @@ public class ChangePasswordScreen implements ApplicationScreen {
         HBox buttonHBOX = new HBox(5);
         HBox comboHBOX = new HBox(5);
 
-        labelVBOX.getChildren().addAll(passwordLabel, passwordConfirmLabel);
-        fieldVBOX.getChildren().addAll(passwordField, passwordConfirmField);
+        labelVBOX.getChildren().addAll(currentPasswordLabel, passwordLabel, passwordConfirmLabel);
+        fieldVBOX.getChildren().addAll(currentPasswordField, passwordField, passwordConfirmField);
         buttonHBOX.getChildren().addAll(changePasswordButton, cancelButton);
         labelVBOX.setAlignment(Pos.BASELINE_CENTER);
         fieldVBOX.setAlignment(Pos.BASELINE_CENTER);
@@ -70,6 +77,17 @@ public class ChangePasswordScreen implements ApplicationScreen {
         layout.setPadding(new Insets(10, 80, 10, 80));
 
         changePasswordButton.setOnAction(e -> {
+
+            LoginHandler.LOGIN_INFORMATION loginInformation = Main.getLoginHandler()
+                    .checkDatabase(Main.getUsername(), currentPasswordField.getText());
+
+            // Checks to see if the current password is the same as the one in the database
+            if (!loginInformation.equals(LoginHandler.LOGIN_INFORMATION.SUCCESSFUL_LOGIN)) {
+                errorLabel.setVisible(true);
+                errorLabel.setText(loginInformation.getMessage());
+                return;
+            }
+
             if (checkFields(passwordField, passwordConfirmField)) {
                 if (passwordField.getText().length() < 8) {
                     errorLabel.setVisible(true);

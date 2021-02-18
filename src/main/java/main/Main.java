@@ -84,7 +84,8 @@ public class Main extends Application {
     }
 
     public static void closeProgram() {
-        boolean answer = new ConfirmationBox("Confirmation", "Are you sure you want to exit?").display();
+        boolean answer = new ConfirmationBox("Confirmation",
+                "Are you sure you want to exit?").display();
         if (answer) {
             // Save everything
             if (currentScreen.getName().equals("GameScreen")) {

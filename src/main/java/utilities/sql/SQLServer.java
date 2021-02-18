@@ -21,6 +21,7 @@ public class SQLServer implements Runnable {
     private String username;
     private String password;
 
+    // Constructor
     public SQLServer(String url, String port, String username, String password) {
         // Gets a connection using the JDBC plugin.
         this.url = url;
